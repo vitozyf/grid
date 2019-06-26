@@ -1,50 +1,64 @@
 <template>
   <div id="app">
-    <button @click="clickHandler">点击</button>
+    <div class="header">
+      <button @click="clickHandler">已选数据</button>
+
+    </div>
     <grid
       :columns="columns"
       :datas="datas"
       :headerHeight="30"
-      :defaultColDef="{editable: true}"
-      :stopEditingWhenGridLosesFocus="false"
-      :enterMovesDown="true"
-      :pagination="true"
-      :paginationAutoPageSize="true"
-      :localeText="localeText"
-      rowSelection="multiple"
-      :rowMultiSelectWithClick="true"
-      :suppressRowClickSelection="true"
+      :selection="true"
       ref="table"
+      type="edit"
+      :getRowClass="getRowClass"
     />
   </div>
 </template>
 
 <script>
-import Grid from './Grid.vue';
+import Vue from 'vue';
+// import Grid from './Grid.vue';
+import Grid from './index.js';
+// import Grid from '../dist/grid.umd.min';
+// const Grid = require('../dist/grid.umd.min.js').default;
+// import './components/SquareComponent';
+// const Grid = require('./index.js').default;
+Vue.component('Grid', Grid);
 
 export default {
   name: 'app',
-  components: {
-    Grid
-  },
   data() {
     return {
       columns: [
         {
-          checkboxSelection: true,
-          width: 40,
-          pinned: 'left'
-        },
-        {
           headerName: 'Athlete',
           field: 'athlete',
-          pinned: 'left'
+          cellClass: 'aaaaa',
+          maxWidth: 100
         },
         {
           headerName: 'Age',
           field: 'age',
           headerClass: 'abc',
-          resizable: true
+          resizable: true,
+          editable: true,
+          width: 100,
+          dataMap: [
+            {
+              key: 23,
+              value: '天'
+            },
+            {
+              key: 19,
+              value: '地'
+            },
+            {
+              key: 27,
+              value: '地'
+            }
+          ]
+          // cellRendererFramework: 'SquareComponent'
         },
         {
           headerName: 'Country',
@@ -53,8 +67,7 @@ export default {
         },
         {
           headerName: 'Year',
-          field: 'year',
-          singleClickEdit: true
+          field: 'year'
         },
         {
           headerName: 'Date',
@@ -81,28 +94,19 @@ export default {
           field: 'total'
         }
       ],
-      datas: [],
-      localeText: {
-        page: '当前',
-        more: '更多',
-        to: '到',
-        of: '共',
-        next: '下一页',
-        last: '最后一页',
-        first: '第一页'
-      }
+      datas: []
     };
   },
-  mounted() {},
-  computed: {
-    rowClass(params) {
-      console.log(params);
-      return ' aaa';
-    }
-  },
   methods: {
+    getRowClass(row) {
+      if (row.data.athlete === 'Michael Phelps') {
+        return 'aaaaa';
+      }
+      return '';
+    },
     clickHandler() {
-      console.log(111, this.$refs.table.gridApi);
+      console.log(this.$refs.table.gridApi);
+      console.log(this.$refs.table.gridApi.getSelectedRows());
     },
     getDatas() {
       const vm = this;
@@ -125,7 +129,7 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 body,
 html {
   height: 100%;
@@ -138,5 +142,8 @@ html {
   color: #2c3e50;
   height: 100%;
   width: 100%;
+  .header {
+    line-height: 30px;
+  }
 }
 </style>
