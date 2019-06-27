@@ -8,6 +8,7 @@
 | datas                     | 表格数据                           | []     | Array                  |      |
 | headerHeight              | 表头高度                           | 30     | Number                 |      |
 | rowHeight                 | 单元格高度                         | 25     | Number                 |      |
+| getRowHeight              | 单元格高度回调                     |        | Function               |      |
 | suppressMovableColumns    | 抑制列移动                         | false  | Boolean                |      |
 | quickFilterText           | 使用此文本作为快速过滤器过滤行     |        | String                 |      |
 | pinnedTopRowData          | 要在网格中显示为固定顶行的数据     | []     | Array                  |      |
@@ -19,10 +20,12 @@
 | cellStyle                 | 单元格样式                         |        | Object                 |      |
 | cellClass                 | 单元格类名                         |        | String                 |      |
 | rowStyle                  | 行样式                             |        | Object                 |      |
+| getRowStyle               | 行样式回调                         |        | Function               |      |
 | rowClass                  | 行类名                             |        | String                 |      |
-| getRowClass               | 行类名回掉                         |        | Function               | data |
+| getRowClass               | 行类名回调                         |        | Function               | data |
 | rowSelection              | 单选或多选                         |        | `single` 、`multiple`  |      |
 | suppressRowClickSelection | 单击行时不会发生行选择             | false  | Boolean                |      |
+| isRowSelectable           | 回调用于确定哪些行是可选择的       |        | Function               |      |
 | --                        | --                                 | --     | --                     | --   |
 | type                      | 表格类型                           | base   | String<`base`, `edit`> |      |
 | selection                 | 是否开启数据选择                   | false  | Boolean                |      |
@@ -36,7 +39,7 @@
 | pinned                  | 设置为`left`或`right`以固定 |                | `left`,`right`            |      |
 | headerClass             | 标题单元格的类              |                | String                    |      |
 | width                   | 宽度                        |                | Number                    |      |
-| hide                    | 吃否隐藏列                  | false          | Boolean                   |      |
+| hide                    | 是否隐藏列                  | false          | Boolean                   |      |
 | resizable               | 允许调整列的大小            | false          | Boolean                   |      |
 | checkboxSelection       | 在列中呈现选择复选框        | false          | Boolean Function(Boolean) |      |
 | headerCheckboxSelection | 在表头中呈现选择复选框      | false          | Boolean Function(Boolean) |      |
@@ -45,3 +48,41 @@
 | editable                | 是否允许编辑                | false          | Boolean                   |      |
 | singleClickEdit         | 单击后进入编辑模式          | false          | Boolean                   |      |
 | dataMap                 | 单元格编辑格式为选择项      | [{key, value}] | Array                     |      |
+
+### 方法
+
+| 方法              | 说明                                                               |
+| ----------------- | ------------------------------------------------------------------ |
+| setRowData(datas) | 修改表格数据（初始化赋值、翻页或整体修改时，清除缓存的已更新数据） |
+| getUpdatedDatas() | 获取修改的数据                                                     |
+| changeColumns()   | 修改列配置                                                         |
+
+### gridApi
+
+| API               | 说明           |
+| ----------------- | -------------- |
+| getSelectedRows() | 获取选择的数据 |
+| selectAll()       | 全选           |
+| deselectAll()     | 清除选择       |
+
+### 事件
+
+| 事件名                                         | 说明                 | 参数 |
+| ---------------------------------------------- | -------------------- | ---- |
+| onCellClicked                                  | 单击单元格           |      |
+| onCellDoubleClicked                            | 双击单元格           |      |
+| onCellFocused                                  | 单元格获取焦点       |      |
+| onCellMouseOver,onCellMouseOut,onCellMouseDown | 鼠标进入、离开、点击 |      |
+| onRowClicked, onRowDoubleClicked               | 行单击、双击         |
+| onSelectionChanged                             | API 选择行           |      |
+| onCellContextMenu                              | 右键单击单元格       |      |
+| onCellValueChanged                             | 编辑后               |      |
+| onCellEditingStarted                           | 编辑开始             |      |
+| onCellEditingStopped                           | 编辑结束             |      |
+
+### 已知问题
+
+- 父级高度必须设定
+- 列宽度不能自适应
+- 编辑后的数据未加样式
+- 未添加数据过滤器

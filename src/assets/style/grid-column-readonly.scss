@@ -2,4 +2,14 @@
   .grid-column-readonly {
     background-color: #f5f5f5;
   }
+  .ag-row-hover {
+    .grid-column-readonly {
+      background-color: #ecf0f1;
+    }
+  }
+  .ag-row-selected {
+    .grid-column-readonly {
+      background-color: #d1f0ff;
+    }
+  }
 }

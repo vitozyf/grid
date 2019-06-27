@@ -2,7 +2,10 @@
   .ag-header-cell-label,
   .ag-header-cell {
     text-align: center;
-    // justify-content: center;
+    justify-content: center;
     color: #000000a6;
+  }
+  .grid-header-selection {
+    justify-content: left;
   }
 }

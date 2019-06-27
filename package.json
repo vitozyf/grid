@@ -1,7 +1,9 @@
 {
-  "name": "grid",
-  "version": "0.1.0",
-  "private": true,
+  "name": "vi-grid",
+  "version": "1.0.0",
+  "license": "MIT",
+  "private": false,
+  "main": "dist/grid.umd.min.js",
   "scripts": {
     "start": "vue-cli-service serve",
     "serve": "vue-cli-service serve",

@@ -31,10 +31,19 @@
   }
 }
 .grid-select-popper {
+  margin-top: 3px !important;
+  .popper__arrow {
+    display: none;
+  }
   .el-select-dropdown__item {
     font-size: 12px;
     padding: 0 5px;
     height: 28px;
     line-height: 28px;
+
+    &.selected {
+      color: #fff;
+      background-color: #ed9e00;
+    }
   }
 }

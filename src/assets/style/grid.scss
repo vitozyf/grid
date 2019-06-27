@@ -1,4 +1,7 @@
 $-border-color: #d9dcde !default;
+.grid-container {
+  height: 100%;
+}
 .ag-header-cell {
   background-color: #e6f0fa;
 }
@@ -20,9 +23,6 @@ $-border-color: #d9dcde !default;
   .ag-row-selected {
     background-color: #d1f0ff;
     border-color: $-border-color;
-    .grid-column-readonly {
-      background-color: #d1f0ff;
-    }
   }
   .ag-header-cell::after,
   .ag-header-group-cell::after {

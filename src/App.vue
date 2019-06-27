@@ -1,18 +1,32 @@
 <template>
   <div id="app">
     <div class="header">
+      <button @click="addNew">新增一行</button>
       <button @click="clickHandler">已选数据</button>
-
+      <button @click="getModel">获取行模型</button>
+      <button @click="paginationGetPageSize">每页行数</button>
+      <button @click="setDataSource">设置数据</button>
+      <button @click="getUpdatedDatas">获取修改数据</button>
+      <button @click="updateColumn">更新列状态</button>
     </div>
-    <grid
-      :columns="columns"
-      :datas="datas"
-      :headerHeight="30"
-      :selection="true"
-      ref="table"
-      type="edit"
-      :getRowClass="getRowClass"
-    />
+    <div :style="{height: '800px'}">
+
+      <grid
+        :columns="columns"
+        :datas="datas"
+        :headerHeight="28"
+        :selection="true"
+        ref="table"
+        type="edit"
+        :getRowClass="getRowClass"
+        :pagination="true"
+        :suppressPaginationPanel="true"
+        :total-count="100"
+        :page-size="50"
+        :page-index="1"
+        :onPageChanged="onPageChanged"
+      />
+    </div>
   </div>
 </template>
 
@@ -34,28 +48,27 @@ export default {
         {
           headerName: 'Athlete',
           field: 'athlete',
-          cellClass: 'aaaaa',
-          maxWidth: 100
+          cellClass: 'aaaaa'
         },
         {
           headerName: 'Age',
           field: 'age',
           headerClass: 'abc',
-          resizable: true,
+          resizable: false,
           editable: true,
           width: 100,
           dataMap: [
             {
-              key: 23,
+              key: 0,
               value: '天'
             },
             {
-              key: 19,
+              key: 1,
               value: '地'
             },
             {
-              key: 27,
-              value: '地'
+              key: 2,
+              value: '人'
             }
           ]
           // cellRendererFramework: 'SquareComponent'
@@ -67,7 +80,14 @@ export default {
         },
         {
           headerName: 'Year',
-          field: 'year'
+          field: 'year',
+          editable: true
+          // cellClass(params) {
+          //   if (params.rowIndex === 0) {
+          //     console.log(params);
+          //   }
+          //   return 'aaa';
+          // }
         },
         {
           headerName: 'Date',
@@ -98,6 +118,45 @@ export default {
     };
   },
   methods: {
+    updateColumn() {
+      const YearColumn = this.columns.find(item => item.field === 'year');
+      YearColumn.editable = !YearColumn.editable;
+      // this.$set(YearColumn, 'editable', false);
+      this.$refs.table.changeColumns(this.columns);
+    },
+    getUpdatedDatas() {
+      console.log(this.$refs.table.getUpdatedDatas());
+    },
+    setDataSource() {
+      const Datas = [];
+      for (let index = 0; index < 100; index++) {
+        Datas.push({
+          athlete: `zhang${index}`,
+          age: index,
+          country: 'USA',
+          year: `2019${index}`,
+          date: '2019-06-30',
+          sport: 'sport',
+          gold: 'gold',
+          silver: 'silver',
+          bronze: 'bronze',
+          total: 'total'
+        });
+      }
+      this.$refs.table.setRowData(Datas);
+    },
+    addNew() {
+      this.datas.unshift({});
+    },
+    paginationGetPageSize() {
+      console.log(this.$refs.table.gridApi.paginationGetPageSize());
+    },
+    onPageChanged(index) {
+      console.log(index);
+    },
+    onPaginationChanged(e) {
+      console.log(111, e);
+    },
     getRowClass(row) {
       if (row.data.athlete === 'Michael Phelps') {
         return 'aaaaa';
@@ -105,22 +164,45 @@ export default {
       return '';
     },
     clickHandler() {
-      console.log(this.$refs.table.gridApi);
+      // const gridOptions = this.$refs.table.gridOptions;
       console.log(this.$refs.table.gridApi.getSelectedRows());
+      // this.$refs.table.gridApi.deselectAll();
+
+      // this.$refs.table.gridColumnApi.autoSizeColumns();
+      // this.$refs.table.gridApi.updateRowData([{ age: 0 }]);
+    },
+    getModel() {
+      console.log(this.$refs.table.gridApi.getModel());
     },
     getDatas() {
-      const vm = this;
-      const httpRequest = new XMLHttpRequest();
-      httpRequest.open(
-        'GET',
-        'https://raw.githubusercontent.com/ag-grid/ag-grid/master/packages/ag-grid-docs/src/olympicWinnersSmall.json'
-      );
-      httpRequest.send();
-      httpRequest.onreadystatechange = () => {
-        if (httpRequest.readyState === 4 && httpRequest.status === 200) {
-          vm.datas = JSON.parse(httpRequest.responseText);
-        }
-      };
+      // const vm = this;
+      // const httpRequest = new XMLHttpRequest();
+      // httpRequest.open(
+      //   'GET',
+      //   'https://raw.githubusercontent.com/ag-grid/ag-grid/master/packages/ag-grid-docs/src/olympicWinnersSmall.json'
+      // );
+      // httpRequest.send();
+      // httpRequest.onreadystatechange = () => {
+      //   if (httpRequest.readyState === 4 && httpRequest.status === 200) {
+      //     vm.datas = JSON.parse(httpRequest.responseText);
+      //   }
+      // };
+      const Datas = [];
+      for (let index = 0; index < 100; index++) {
+        Datas.push({
+          athlete: `vito${index}`,
+          age: index,
+          country: '中国',
+          year: `2019${index}`,
+          date: '2019-06-30',
+          sport: 'sport',
+          gold: 'gold',
+          silver: 'silver',
+          bronze: 'bronze',
+          total: 'total'
+        });
+      }
+      this.datas = Datas;
     }
   },
   created() {
@@ -133,6 +215,7 @@ export default {
 body,
 html {
   height: 100%;
+  margin: 0;
 }
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
