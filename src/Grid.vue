@@ -32,8 +32,10 @@
 </template>
 <script>
 import { AgGridVue } from 'ag-grid-vue';
-import './components/SquareComponent';
-import Event from './components/event';
+import './scripts/SquareComponent';
+import Event from './mixins/event';
+import columnHandler from './mixins/columnHandler';
+import api from './mixins/api';
 export default {
   name: 'Grid',
 
@@ -41,7 +43,7 @@ export default {
     AgGridVue
   },
 
-  mixins: [Event],
+  mixins: [Event, columnHandler, api],
 
   props: {
     columns: {
@@ -117,72 +119,18 @@ export default {
       this.defaultColDef.minWidth = 50;
       this.changeColumns(this.columns);
     },
-    changeColumns(columns) {
-      // const columns = this.columns;
-      columns.forEach(column => {
-        let cellClass = column.cellClass || '';
-        // 选择编辑组件
-        if (column.dataMap && column.dataMap.length > 0) {
-          column.cellRendererFramework = 'GridColumnSelect';
-          column.cellRendererParams = this.updatedDatas;
-          cellClass += ' grid-select-cell';
-          column.singleClickEdit = true;
-        }
-        // 只读类
-        if (column.editable === false && this.type === 'edit') {
-          cellClass += ' grid-column-readonly';
-        }
-        column.cellClass = cellClass;
-        // 通用表头
-        if (!column.headerComponentFramework) {
-          column.headerComponentFramework = 'GridColumnHeader';
-        }
-        // 不可编辑列
-        column.editable =
-          column.editable === false ? false : this.type === 'edit';
-      });
 
-      // return columns;
-      if (this.selection && !columns.find(item => item.checkboxSelection)) {
-        columns.unshift({
-          checkboxSelection: true,
-          headerCheckboxSelection: true,
-          width: 40,
-          pinned: 'left',
-          editable: false,
-          headerClass: 'grid-header-selection',
-          resizable: false
-        });
+    /**
+     * 增加已修改的数据集合
+     */
+    addUpdatedData(updatedData) {
+      if (
+        !this.updatedDatas.find(
+          item => JSON.stringify(item) === JSON.stringify(updatedData)
+        )
+      ) {
+        this.updatedDatas.push(updatedData);
       }
-
-      // autoSizeColumns
-      // console.log(this.gridOptions);
-      // console.log(this.gridOptions.columnDefs.filter(item => !item.width));
-      // this.gridOptions.columnApi.autoSizeColumns(
-      //   this.gridOptions.columnDefs.filter(item => !item.width)
-      // );
-      this.setColumnDefs(columns);
-    },
-    /**
-     * 设置表格数据
-     */
-    setRowData(datas) {
-      this.updatedDatas = [];
-      this.gridApi.setRowData(datas);
-    },
-    /**
-     * 设置表格列
-     */
-    setColumnDefs(columns) {
-      if (this.gridApi) {
-        this.gridApi.setColumnDefs(columns);
-      }
-    },
-    /**
-     * 获取已修改的数据
-     */
-    getUpdatedDatas() {
-      return this.updatedDatas;
     }
   },
   beforeMount() {

@@ -1,3 +1,6 @@
+/**
+ * 注册组件-cellRendererFramework
+ */
 import Vue from 'vue';
 import Select from 'element-ui/lib/select';
 import Option from 'element-ui/lib/option';
@@ -24,14 +27,10 @@ Vue.component('GridColumnSelect', {
           },
           on: {
             input(v) {
-              if (
-                !vm.params.colDef.cellRendererParams.find(
-                  item =>
-                    JSON.stringify(item) === JSON.stringify(vm.params.data)
-                )
-              ) {
-                vm.params.colDef.cellRendererParams.push(vm.params.data);
-              }
+              vm.params.colDef.cellRendererParams.addUpdatedData(
+                vm.params.data
+              );
+
               vm.params.setValue(v);
             }
           },
@@ -59,10 +58,6 @@ Vue.component('GridColumnSelect', {
 Vue.component('GridColumnHeader', {
   render(h) {
     const vm = this;
-    // const { column, columnApi } = vm.params;
-    // console.log(vm.params, column, columnApi);
-    // sizeColumnsToFit
-    // columnApi.autoSizeColumn(column.colId);
     const { colDef } = vm.params.column;
     return h('span', colDef.headerName);
   }
