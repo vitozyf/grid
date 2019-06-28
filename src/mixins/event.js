@@ -32,7 +32,7 @@ export default {
       ) {
         this.updatedDatas.push(e.data);
       }
-      // console.log(1122, e, e.columnApi.autoSizeColumn(e.column));
+      // console.log(1122, e);
       // const colDef = e.colDef;
       // colDef.cellStyle = () => {
       //   return {

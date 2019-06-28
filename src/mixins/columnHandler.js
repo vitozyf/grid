@@ -29,6 +29,7 @@ export default {
           column.editable === false ? false : this.type === 'edit';
       });
 
+      // 选择列
       if (this.selection && !columns.find(item => item.checkboxSelection)) {
         columns.unshift({
           checkboxSelection: true,
@@ -41,12 +42,14 @@ export default {
         });
       }
 
-      // autoSizeColumns
-      // console.log(this.gridOptions);
-      // console.log(this.gridOptions.columnDefs.filter(item => !item.width));
+      // 根据内容自动设置列宽
+      // const GridColumns = this.gridOptions.columnApi.getAllColumns();
       // this.gridOptions.columnApi.autoSizeColumns(
-      //   this.gridOptions.columnDefs.filter(item => !item.width)
+      //   GridColumns.filter(item => !item.colDef.width)
       // );
+
+      // this.gridOptions.columnApi.setColumnWidth(GridColumns[3], 'auto');
+      // 调用api设置列
       this.setColumnDefs(columns);
     },
 

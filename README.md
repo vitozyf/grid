@@ -32,22 +32,24 @@
 
 ### `columns`列属性
 
-| 参数                    | 说明                        | 默认值         | 类型                      | 参数 |
-| ----------------------- | --------------------------- | -------------- | ------------------------- | ---- |
-| headerName              | 表头文字                    |                | String                    |      |
-| field                   | 绑定字段                    |                | String                    |      |
-| pinned                  | 设置为`left`或`right`以固定 |                | `left`,`right`            |      |
-| headerClass             | 标题单元格的类              |                | String                    |      |
-| width                   | 宽度                        |                | Number                    |      |
-| hide                    | 是否隐藏列                  | false          | Boolean                   |      |
-| resizable               | 允许调整列的大小            | false          | Boolean                   |      |
-| checkboxSelection       | 在列中呈现选择复选框        | false          | Boolean Function(Boolean) |      |
-| headerCheckboxSelection | 在表头中呈现选择复选框      | false          | Boolean Function(Boolean) |      |
-| cellClass               | 单元格的类                  |                | String, Function(String)  |      |
-| cellStyle               | 单元格样式                  |                | Object, Function(Object)  |      |
-| editable                | 是否允许编辑                | false          | Boolean                   |      |
-| singleClickEdit         | 单击后进入编辑模式          | false          | Boolean                   |      |
-| dataMap                 | 单元格编辑格式为选择项      | [{key, value}] | Array                     |      |
+| 参数                    | 说明                                                       | 默认值         | 类型                      | 参数 |
+| ----------------------- | ---------------------------------------------------------- | -------------- | ------------------------- | ---- |
+| headerName              | 表头文字                                                   |                | String                    |      |
+| field                   | 绑定字段                                                   |                | String                    |      |
+| pinned                  | 设置为`left`或`right`以固定                                |                | `left`,`right`            |      |
+| headerClass             | 标题单元格的类                                             |                | String                    |      |
+| width                   | 宽度                                                       |                | Number                    |      |
+| hide                    | 是否隐藏列                                                 | false          | Boolean                   |      |
+| resizable               | 允许调整列的大小                                           | false          | Boolean                   |      |
+| checkboxSelection       | 在列中呈现选择复选框                                       | false          | Boolean Function(Boolean) |      |
+| headerCheckboxSelection | 在表头中呈现选择复选框                                     | false          | Boolean Function(Boolean) |      |
+| cellClass               | 单元格的类                                                 |                | String, Function(String)  |      |
+| cellStyle               | 单元格样式                                                 |                | Object, Function(Object)  |      |
+| editable                | 是否允许编辑                                               | false          | Boolean                   |      |
+| singleClickEdit         | 单击后进入编辑模式                                         | false          | Boolean                   |      |
+| dataMap                 | 单元格编辑格式为选择项                                     | [{key, value}] | Array                     |      |
+| cellRenderer            | 渲染方法(简单数据处理，可直接返回数据，或返回 html 字符串) |                | Function                  |      |
+| cellRendererFramework   | 渲染组件                                                   |                | String                    |      |
 
 ### API
 
@@ -85,4 +87,4 @@
 - 父级高度必须设定
 - 列宽度不能自适应
 - 编辑后的数据未加样式
-- 未添加数据过滤器
+- 未添加数据过滤器(暂时用 cellRenderer 替代)

@@ -81,13 +81,13 @@ export default {
         {
           headerName: 'Year',
           field: 'year',
-          editable: true
-          // cellClass(params) {
-          //   if (params.rowIndex === 0) {
-          //     console.log(params);
-          //   }
-          //   return 'aaa';
-          // }
+          editable: true,
+          cellRenderer(params) {
+            if (params.value > 201910) {
+              return '展示中';
+            }
+            return '未展示';
+          }
         },
         {
           headerName: 'Date',
