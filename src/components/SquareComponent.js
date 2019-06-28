@@ -24,6 +24,14 @@ Vue.component('GridColumnSelect', {
           },
           on: {
             input(v) {
+              if (
+                !vm.params.colDef.cellRendererParams.find(
+                  item =>
+                    JSON.stringify(item) === JSON.stringify(vm.params.data)
+                )
+              ) {
+                vm.params.colDef.cellRendererParams.push(vm.params.data);
+              }
               vm.params.setValue(v);
             }
           },

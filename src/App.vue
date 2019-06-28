@@ -158,8 +158,8 @@ export default {
       console.log(111, e);
     },
     getRowClass(row) {
-      if (row.data.athlete === 'Michael Phelps') {
-        return 'aaaaa';
+      if (row.data.athlete === 'vito0') {
+        return 'rrrrr';
       }
       return '';
     },

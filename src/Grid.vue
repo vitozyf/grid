@@ -124,6 +124,7 @@ export default {
         // 选择编辑组件
         if (column.dataMap && column.dataMap.length > 0) {
           column.cellRendererFramework = 'GridColumnSelect';
+          column.cellRendererParams = this.updatedDatas;
           cellClass += ' grid-select-cell';
           column.singleClickEdit = true;
         }
@@ -153,6 +154,13 @@ export default {
           resizable: false
         });
       }
+
+      // autoSizeColumns
+      // console.log(this.gridOptions);
+      // console.log(this.gridOptions.columnDefs.filter(item => !item.width));
+      // this.gridOptions.columnApi.autoSizeColumns(
+      //   this.gridOptions.columnDefs.filter(item => !item.width)
+      // );
       this.setColumnDefs(columns);
     },
     /**

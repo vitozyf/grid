@@ -29,6 +29,14 @@ export default {
       ) {
         this.updatedDatas.push(e.data);
       }
+      console.log(1122, e, e.columnApi.autoSizeColumn(e.column));
+      // const colDef = e.colDef;
+      // colDef.cellStyle = () => {
+      //   return {
+      //     backgroundColor: '#ccc'
+      //   };
+      // };
+      // this.setColumnDefs([colDef]);
       this.$emit('onCellEditingStopped', e);
     };
   }
