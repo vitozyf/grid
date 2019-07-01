@@ -2,35 +2,33 @@
 
 ### 表格属性
 
-| 参数                      | 说明                                                 | 默认值                    | 类型                                      | 参数 |
-| ------------------------- | ---------------------------------------------------- | ------------------------- | ----------------------------------------- | ---- |
-| columns                   | 列                                                   | []                        | Array                                     |      |
-| datas                     | 表格数据                                             | []                        | Array                                     |      |
-| headerHeight              | 表头高度                                             | 30                        | Number                                    |      |
-| rowHeight                 | 单元格高度                                           | 25                        | Number                                    |      |
-| getRowHeight              | 单元格高度回调                                       |                           | Function                                  |      |
-| quickFilterText           | 使用此文本作为快速过滤器过滤行                       |                           | String                                    |      |
-| pinnedTopRowData          | 要在网格中显示为固定顶行的数据                       | []                        | Array                                     |      |
-| pinnedBottomRowData       | 要在网格中显示为固定底部行的数据。                   | []                        | Array                                     |      |
-| pagination                | 启用分页                                             | false                     | Boolean                                   |      |
-| paginationPageSize        | 每页加载多少行                                       | 100                       | Number                                    |      |
-| paginationAutoPageSize    | 每页加载的行数自动调整                               | false                     | Boolean                                   |      |
-| suppressPaginationPanel   | 隐藏分页控件                                         | false                     | Boolean                                   |      |
-| cellStyle                 | 单元格样式                                           |                           | Object                                    |      |
-| cellClass                 | 单元格类名                                           |                           | String                                    |      |
-| rowStyle                  | 行样式                                               |                           | Object                                    |      |
-| getRowStyle               | 行样式回调                                           |                           | Function                                  |      |
-| rowClass                  | 行类名                                               |                           | String                                    |      |
-| getRowClass               | 行类名回调                                           |                           | Function                                  | data |
-| rowSelection              | 单选或多选                                           |                           | `single` 、`multiple`                     |      |
-| suppressRowClickSelection | 单击行时不会发生行选择                               | false                     | Boolean                                   |      |
-| isRowSelectable           | 回调用于确定哪些行是可选择的                         |                           | Function                                  |      |
-| domLayout                 | 设置为`autoHeight`根据数据调整高度否则必须给容器高度 | normal                    | String（`normal`、`autoHeight`或`print`） |      |
-| --                        | --                                                   | --                        | --                                        | --   |
-| type                      | 表格类型                                             | base                      | String<`base`, `edit`>                    |      |
-| selection                 | 是否开启数据选择                                     | false                     | Boolean                                   |      |
-| defaultColPro             | 列的重复定义属性(如设置最小列宽不用每列单独设置)     | {}                        | Object                                    |      |
-| overlayNoRowsTemplate     | 空数据 html 模版                                     | `'<span>暂无数据</span>'` | String                                    |      |
+| 参数                  | 说明                                                 | 默认值                    | 类型                                      | 参数 |
+| --------------------- | ---------------------------------------------------- | ------------------------- | ----------------------------------------- | ---- |
+| columns               | 列                                                   | []                        | Array                                     |      |
+| datas                 | 表格数据                                             | []                        | Array                                     |      |
+| headerHeight          | 表头高度                                             | 30                        | Number                                    |      |
+| rowHeight             | 单元格高度                                           | 25                        | Number                                    |      |
+| getRowHeight          | 单元格高度回调                                       |                           | Function                                  |      |
+| quickFilterText       | 使用此文本作为快速过滤器过滤行                       |                           | String                                    |      |
+| pinnedTopRowData      | 要在网格中显示为固定顶行的数据                       | []                        | Array                                     |      |
+| pinnedBottomRowData   | 要在网格中显示为固定底部行的数据。                   | []                        | Array                                     |      |
+| pageSize              | 每页行数                                             | 20                        | Number                                    |      |
+| pageIndex             | 当前页                                               | 1                         | Number                                    |      |
+| totalCount            | 总条数                                               | 1                         | Number                                    |      |
+| onPageChanged         | 翻页方法                                             |                           | Function                                  |      |
+| cellStyle             | 单元格样式                                           |                           | Object                                    |      |
+| cellClass             | 单元格类名                                           |                           | String                                    |      |
+| rowStyle              | 行样式                                               |                           | Object                                    |      |
+| getRowStyle           | 行样式回调                                           |                           | Function                                  |      |
+| rowClass              | 行类名                                               |                           | String                                    |      |
+| getRowClass           | 行类名回调                                           |                           | Function                                  | data |
+| isRowSelectable       | 回调用于确定哪些行是可选择的                         |                           | Function                                  |      |
+| domLayout             | 设置为`autoHeight`根据数据调整高度否则必须给容器高度 | normal                    | String（`normal`、`autoHeight`或`print`） |      |
+| --                    | --                                                   | --                        | --                                        | --   |
+| type                  | 表格类型                                             | base                      | String<`base`, `edit`>                    |      |
+| selection             | 是否开启数据选择                                     | false                     | Boolean                                   |      |
+| defaultColPro         | 列的重复定义属性(如设置最小列宽不用每列单独设置)     | {}                        | Object                                    |      |
+| overlayNoRowsTemplate | 空数据 html 模版                                     | `'<span>暂无数据</span>'` | String                                    |      |
 
 ### `columns`列属性
 
