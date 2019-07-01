@@ -8,7 +8,7 @@
       :rowData="datas"
       ref="table"
       :gridOptions="options"
-      :defaultColDef="defaultColDef"
+      :defaultColDef="defaultColDefComputed"
       :enterMovesDown="true"
       :enterMovesDownAfterEdit="true"
       :stopEditingWhenGridLosesFocus="true"
@@ -50,6 +50,12 @@ export default {
       type: Array,
       default() {
         return [];
+      }
+    },
+    defaultColPro: {
+      type: Object,
+      default() {
+        return {};
       }
     },
     datas: {
@@ -96,6 +102,14 @@ export default {
       set(o) {
         this.insideOptions = o;
       }
+    },
+    defaultColDefComputed: {
+      get() {
+        return Object.assign({}, this.defaultColPro, this.defaultColDef);
+      },
+      set(col) {
+        this.defaultColDef = col;
+      }
     }
   },
 
@@ -113,10 +127,16 @@ export default {
     /**
      * 初始化表格
      */
-    init() {
+    initCreated() {
       this.defaultColDef.editable = this.type === 'edit';
       this.defaultColDef.resizable = true;
       this.defaultColDef.minWidth = 50;
+      this.defaultColDef.suppressMovable = true;
+    },
+    /**
+     * 初始化表格(挂载后)
+     */
+    initMounted() {
       this.changeColumns(this.columns);
     },
 
@@ -133,13 +153,16 @@ export default {
       }
     }
   },
+  created() {
+    this.initCreated();
+  },
   beforeMount() {
     this.insideOptions = {};
   },
   mounted() {
     this.gridApi = this.insideOptions.api;
     this.gridColumnApi = this.insideOptions.columnApi;
-    this.init();
+    this.initMounted();
   }
 };
 </script>

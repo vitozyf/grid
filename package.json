@@ -8,8 +8,9 @@
     "start": "vue-cli-service serve",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build --target lib  --formats umd-min --name grid ./src/index.js",
+    "buildp": "vue-cli-service build --target lib  --formats umd-min --name grid ./src/index.js",
     "lint": "vue-cli-service lint",
-    "postbuild": "./build/zip.sh"
+    "postbuildp": "./build/zip.sh"
   },
   "dependencies": {
     "ag-grid-community": "^21.0.1",

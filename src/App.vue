@@ -25,7 +25,9 @@
         :page-size="50"
         :page-index="1"
         :onPageChanged="onPageChanged"
+        @onCellClicked="onCellClicked"
       />
+      <!-- domLayout='autoHeight' -->
     </div>
   </div>
 </template>
@@ -118,6 +120,9 @@ export default {
     };
   },
   methods: {
+    onCellClicked() {
+      // console.log(111);
+    },
     updateColumn() {
       const YearColumn = this.columns.find(item => item.field === 'year');
       YearColumn.editable = !YearColumn.editable;

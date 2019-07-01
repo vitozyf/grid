@@ -6,6 +6,7 @@ export default {
     changeColumns(columns) {
       columns.forEach(column => {
         let cellClass = column.cellClass || '';
+
         // 选择编辑组件
         if (column.dataMap && column.dataMap.length > 0) {
           column.cellRendererFramework = 'GridColumnSelect';
@@ -14,19 +15,26 @@ export default {
           };
           cellClass += ' grid-select-cell';
           column.singleClickEdit = true;
+          column.suppressClickEdit = true;
         }
+
         // 只读类
         if (column.editable === false && this.type === 'edit') {
           cellClass += ' grid-column-readonly';
         }
         column.cellClass = cellClass;
+
         // 通用表头
         if (!column.headerComponentFramework) {
           column.headerComponentFramework = 'GridColumnHeader';
         }
+
         // 不可编辑列
         column.editable =
           column.editable === false ? false : this.type === 'edit';
+
+        // 自动调整列宽时不包含设置宽度的列
+        column.suppressSizeToFit = !!column.width;
       });
 
       // 选择列
@@ -38,17 +46,11 @@ export default {
           pinned: 'left',
           editable: false,
           headerClass: 'grid-header-selection',
-          resizable: false
+          resizable: false,
+          suppressSizeToFit: true
         });
       }
 
-      // 根据内容自动设置列宽
-      // const GridColumns = this.gridOptions.columnApi.getAllColumns();
-      // this.gridOptions.columnApi.autoSizeColumns(
-      //   GridColumns.filter(item => !item.colDef.width)
-      // );
-
-      // this.gridOptions.columnApi.setColumnWidth(GridColumns[3], 'auto');
       // 调用api设置列
       this.setColumnDefs(columns);
     },

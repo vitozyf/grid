@@ -17,13 +17,16 @@ const EventNames = [
   'onCellEditingStarted'
 ];
 export default {
-  beforeMount() {
-    EventNames.forEach(name => {
-      this.gridOptions[name] = e => {
-        this.$emit(name, e);
-      };
-    });
-    this.gridOptions.onCellEditingStopped = e => {
+  methods: {
+    gridReady(e) {
+      // 设置自适应列宽
+      const TIMEID = setTimeout(() => {
+        this.gridApi.sizeColumnsToFit();
+        clearTimeout(TIMEID);
+      }, 100);
+      this.$emit('onGridReady', e);
+    },
+    cellEditingStopped(e) {
       const updatedDatas = this.updatedDatas;
       if (
         !updatedDatas.find(
@@ -32,23 +35,16 @@ export default {
       ) {
         this.updatedDatas.push(e.data);
       }
-      // console.dir(e);
-      // e.api.sizeColumnsToFit();
-      // console.log(e.column.getColId());
-      // console.log(e.rowIndex);
-      // console.log(e.columnApi.getColumnState());
-      // const colDef = e.colDef;
-      // colDef.cellStyle = params => {
-      //   // console.log(params);
-      //   if (JSON.stringify(e.data) === JSON.stringify(params.data)) {
-      //     return {
-      //       backgroundColor: '#ccc'
-      //     };
-      //   }
-      //   return null;
-      // };
-      // this.setColumnDefs(this.columns);
       this.$emit('onCellEditingStopped', e);
-    };
+    }
+  },
+  beforeMount() {
+    EventNames.forEach(name => {
+      this.gridOptions[name] = e => {
+        this.$emit(name, e);
+      };
+    });
+    this.gridOptions.onGridReady = this.gridReady;
+    this.gridOptions.onCellEditingStopped = this.cellEditingStopped;
   }
 };
