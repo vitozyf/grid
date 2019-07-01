@@ -32,14 +32,22 @@ export default {
       ) {
         this.updatedDatas.push(e.data);
       }
-      // console.log(1122, e);
+      // console.dir(e);
+      // e.api.sizeColumnsToFit();
+      // console.log(e.column.getColId());
+      // console.log(e.rowIndex);
+      // console.log(e.columnApi.getColumnState());
       // const colDef = e.colDef;
-      // colDef.cellStyle = () => {
-      //   return {
-      //     backgroundColor: '#ccc'
-      //   };
+      // colDef.cellStyle = params => {
+      //   // console.log(params);
+      //   if (JSON.stringify(e.data) === JSON.stringify(params.data)) {
+      //     return {
+      //       backgroundColor: '#ccc'
+      //     };
+      //   }
+      //   return null;
       // };
-      // this.setColumnDefs([colDef]);
+      // this.setColumnDefs(this.columns);
       this.$emit('onCellEditingStopped', e);
     };
   }

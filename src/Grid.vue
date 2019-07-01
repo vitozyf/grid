@@ -91,7 +91,7 @@ export default {
   computed: {
     options: {
       get() {
-        return Object.assign(this.gridOptions, this.insideOptions);
+        return Object.assign(this.insideOptions, this.gridOptions);
       },
       set(o) {
         this.insideOptions = o;
@@ -137,8 +137,8 @@ export default {
     this.insideOptions = {};
   },
   mounted() {
-    this.gridApi = this.gridOptions.api;
-    this.gridColumnApi = this.gridOptions.columnApi;
+    this.gridApi = this.insideOptions.api;
+    this.gridColumnApi = this.insideOptions.columnApi;
     this.init();
   }
 };

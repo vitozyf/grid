@@ -18,13 +18,17 @@ Vue.component('GridColumnSelect', {
     const vm = this;
     const { editable, dataMap = [] } = vm.params.colDef;
     if (editable) {
+      const value = dataMap.find(item => item.key === vm.params.value)
+        ? vm.params.value
+        : '';
       return h(
         'el-select',
         {
-          attrs: {
-            value: vm.params.value,
+          props: {
+            value,
             'popper-class': 'grid-select-popper'
           },
+
           on: {
             input(v) {
               vm.params.colDef.cellRendererParams.addUpdatedData(

@@ -203,6 +203,7 @@ export default {
         });
       }
       this.datas = Datas;
+      // this.$refs.table.setRowData(Datas);
     }
   },
   created() {

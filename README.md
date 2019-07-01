@@ -51,21 +51,16 @@
 | cellRenderer            | 渲染方法(简单数据处理，可直接返回数据，或返回 html 字符串) |                | Function                  |      |
 | cellRendererFramework   | 渲染组件                                                   |                | String                    |      |
 
-### API
+### API(调用必须在表格组件挂载后)
 
 | 方法              | 说明                                                               |
 | ----------------- | ------------------------------------------------------------------ |
 | setRowData(datas) | 修改表格数据（初始化赋值、翻页或整体修改时，清除缓存的已更新数据） |
 | getUpdatedDatas() | 获取修改的数据                                                     |
 | changeColumns()   | 修改列配置                                                         |
-
-### gridApi
-
-| API               | 说明           |
-| ----------------- | -------------- |
-| getSelectedRows() | 获取选择的数据 |
-| selectAll()       | 全选           |
-| deselectAll()     | 清除选择       |
+| getSelectedRows() | 获取选择的数据                                                     |
+| selectAll()       | 全选                                                               |
+| deselectAll()     | 清除选择                                                           |
 
 ### 事件
 
@@ -87,4 +82,3 @@
 - 父级高度必须设定
 - 列宽度不能自适应
 - 编辑后的数据未加样式
-- 未添加数据过滤器(暂时用 cellRenderer 替代)
