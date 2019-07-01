@@ -4,10 +4,12 @@
 import Vue from 'vue';
 import Select from 'element-ui/lib/select';
 import Option from 'element-ui/lib/option';
+import Checkbox from 'element-ui/lib/checkbox';
 import Pagination from 'element-ui/lib/pagination';
 
 Vue.component('el-select', Select);
 Vue.component('el-option', Option);
+Vue.component('el-checkbox', Checkbox);
 Vue.component('el-pagination', Pagination);
 
 /**
@@ -64,5 +66,28 @@ Vue.component('GridColumnHeader', {
     const vm = this;
     const { colDef } = vm.params.column;
     return h('span', colDef.headerName);
+  }
+});
+
+/**
+ * 渲染选择列头
+ */
+Vue.component('GridColumnHeaderChecked', {
+  render(h) {
+    const vm = this;
+    return h('el-checkbox', {
+      props: {
+        value: false
+      },
+      on: {
+        input(value) {
+          if (value) {
+            vm.params.api.selectAll();
+          } else {
+            vm.params.api.deselectAll();
+          }
+        }
+      }
+    });
   }
 });

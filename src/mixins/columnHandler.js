@@ -38,6 +38,7 @@ export default {
       });
 
       // 选择列
+      // const vm = this;
       if (this.selection && !columns.find(item => item.checkboxSelection)) {
         columns.unshift({
           checkboxSelection: true,
@@ -48,6 +49,10 @@ export default {
           headerClass: 'grid-header-selection',
           resizable: false,
           suppressSizeToFit: true
+          // headerComponentFramework: 'GridColumnHeaderChecked',
+          // headerComponentParams: {
+          //   selectedRows: 111
+          // }
         });
       }
 

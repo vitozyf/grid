@@ -14,7 +14,8 @@ const EventNames = [
   'onSelectionChanged',
   'onCellContextMenu',
   'onCellValueChanged',
-  'onCellEditingStarted'
+  'onCellEditingStarted',
+  'onRowSelected'
 ];
 export default {
   methods: {

@@ -17,6 +17,7 @@
       :singleClickEdit="true"
       :paginationPageSize="200"
       rowSelection="multiple"
+      :overlayNoRowsTemplate="overlayNoRowsTemplate"
     ></ag-grid-vue>
     <el-pagination
       v-if="!!onPageChanged"
@@ -91,7 +92,11 @@ export default {
       type: Number,
       default: 1
     },
-    onPageChanged: Function
+    onPageChanged: Function,
+    overlayNoRowsTemplate: {
+      type: String,
+      default: '<span>暂无数据</span>'
+    }
   },
 
   computed: {
@@ -105,7 +110,7 @@ export default {
     },
     defaultColDefComputed: {
       get() {
-        return Object.assign({}, this.defaultColPro, this.defaultColDef);
+        return Object.assign({}, this.defaultColDef, this.defaultColPro);
       },
       set(col) {
         this.defaultColDef = col;
@@ -163,6 +168,7 @@ export default {
     this.gridApi = this.insideOptions.api;
     this.gridColumnApi = this.insideOptions.columnApi;
     this.initMounted();
+    // console.log(this.$el.querySelector('.ag-overlay-no-rows-center'));
   }
 };
 </script>

@@ -26,7 +26,7 @@
         :page-index="1"
         :onPageChanged="onPageChanged"
         @onCellClicked="onCellClicked"
-      />
+      ></grid>
       <!-- domLayout='autoHeight' -->
     </div>
   </div>
