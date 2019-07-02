@@ -1,42 +1,44 @@
 $-pagination-color: #666 !default;
-.el-pagination {
-  text-align: right;
-  line-height: 30px;
-  padding: 0;
-  button {
-    display: inline-block;
-    &:hover {
-      color: $-pagination-color;
-    }
-    &:disabled {
-      background: transparent;
-    }
-  }
-  .btn-next,
-  .btn-prev {
-    background: transparent;
-  }
-  .el-pagination__total {
-    margin-top: 4px;
-  }
-  .btn-next,
-  .btn-prev,
-  .el-pager {
+.grid-container {
+  .el-pagination {
+    text-align: right;
     line-height: 30px;
-    height: 30px;
-    color: $-pagination-color;
-    font-weight: 100;
-
-    li {
-      margin-top: 4px;
-      background-color: transparent;
+    padding: 0;
+    button {
+      display: inline-block;
       &:hover {
         color: $-pagination-color;
       }
-      &.active {
-        color: #fff;
-        background-color: #999;
-        font-weight: bold;
+      &:disabled {
+        background: transparent;
+      }
+    }
+    .btn-next,
+    .btn-prev {
+      background: transparent;
+    }
+    .el-pagination__total {
+      margin-top: 4px;
+    }
+    .btn-next,
+    .btn-prev,
+    .el-pager {
+      line-height: 30px;
+      height: 30px;
+      color: $-pagination-color;
+      font-weight: 100;
+
+      li {
+        margin-top: 4px;
+        background-color: transparent;
+        &:hover {
+          color: $-pagination-color;
+        }
+        &.active {
+          color: #fff;
+          background-color: #999;
+          font-weight: bold;
+        }
       }
     }
   }
