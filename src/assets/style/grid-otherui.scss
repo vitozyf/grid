@@ -2,6 +2,8 @@
 @import '../theme-chalk/select.scss';
 @import '../theme-chalk/pagination.scss';
 @import '../theme-chalk/option.scss';
-.el-input--suffix .el-input__inner {
-  padding-right: 5px;
+.ag-theme-balham {
+  .el-input--suffix .el-input__inner {
+    padding-right: 5px;
+  }
 }

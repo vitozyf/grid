@@ -25,9 +25,9 @@ export default {
         column.cellClass = cellClass;
 
         // 通用表头
-        if (!column.headerComponentFramework) {
-          column.headerComponentFramework = 'GridColumnHeader';
-        }
+        // if (!column.headerComponentFramework) {
+        //   column.headerComponentFramework = 'GridColumnHeader';
+        // }
 
         // 不可编辑列
         column.editable =

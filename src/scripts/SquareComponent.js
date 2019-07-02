@@ -68,26 +68,3 @@ Vue.component('GridColumnHeader', {
     return h('span', colDef.headerName);
   }
 });
-
-/**
- * 渲染选择列头
- */
-Vue.component('GridColumnHeaderChecked', {
-  render(h) {
-    const vm = this;
-    return h('el-checkbox', {
-      props: {
-        value: false
-      },
-      on: {
-        input(value) {
-          if (value) {
-            vm.params.api.selectAll();
-          } else {
-            vm.params.api.deselectAll();
-          }
-        }
-      }
-    });
-  }
-});
