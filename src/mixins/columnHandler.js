@@ -15,7 +15,6 @@ export default {
           };
           cellClass += ' grid-select-cell';
           column.singleClickEdit = true;
-          column.suppressClickEdit = true;
         }
 
         // 只读类
@@ -33,7 +32,6 @@ export default {
       });
 
       // 选择列
-      // const vm = this;
       if (this.selection && !columns.find(item => item.checkboxSelection)) {
         columns.unshift({
           checkboxSelection: true,
@@ -48,7 +46,7 @@ export default {
       }
 
       // 调用api设置列
-      this.setColumnDefs(columns);
+      // this.setColumnDefs(columns);
     },
 
     /**

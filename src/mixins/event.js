@@ -34,8 +34,6 @@ export default {
     cellValueChanged(e) {
       if (e.newValue !== e.oldValue) {
         this.addUpdatedData(e.data);
-        // console.log(e);
-        // e.api.refreshCells([e.node], [e.column]);
       }
       this.$emit('onCellValueChanged', e);
     }

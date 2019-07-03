@@ -8,6 +8,7 @@
       <button @click="setDataSource">设置数据</button>
       <button @click="getUpdatedDatas">获取修改数据</button>
       <button @click="updateColumn">更新列状态</button>
+      <button @click="forEachNode">选择部分数据</button>
     </div>
     <div :style="{height: '800px'}">
 
@@ -126,6 +127,13 @@ export default {
     };
   },
   methods: {
+    forEachNode() {
+      this.$refs.table.forEachNode(node => {
+        if (node.data.year < 201910) {
+          node.setSelected(true);
+        }
+      });
+    },
     onCellClicked() {
       // console.log(111);
     },
@@ -133,7 +141,7 @@ export default {
       const YearColumn = this.columns.find(item => item.field === 'year');
       YearColumn.editable = !YearColumn.editable;
       // this.$set(YearColumn, 'editable', false);
-      this.$refs.table.changeColumns(this.columns);
+      // this.$refs.table.changeColumns(this.columns);
     },
     getUpdatedDatas() {
       console.log(this.$refs.table.getUpdatedDatas());

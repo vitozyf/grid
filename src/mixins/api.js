@@ -4,6 +4,9 @@
 
 export default {
   methods: {
+    forEachNode(method) {
+      return this.gridApi.forEachNode(method);
+    },
     /**
      * 设置表格数据
      */

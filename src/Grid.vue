@@ -140,7 +140,9 @@ export default {
       this.defaultColDef.suppressMovable = true;
       // this.defaultColDef.cellStyle = params => {
       //   // console.log(params.data.gold);
-      //   // console.log(this.editedDatas);
+      //   if (params.value === 'vito0') {
+      //     console.log(params);
+      //   }
       //   const { data } = params;
       //   const IsEditedData = this.updatedDatas.find(
       //     item => JSON.stringify(data) === JSON.stringify(item)
@@ -150,13 +152,14 @@ export default {
       //   }
       //   return {};
       // };
+      this.changeColumns(this.columns);
     },
     /**
      * 初始化表格(挂载后)
      */
-    initMounted() {
-      this.changeColumns(this.columns);
-    },
+    // initMounted() {
+    //   this.changeColumns(this.columns);
+    // },
 
     /**
      * 增加已修改的数据集合
@@ -192,7 +195,7 @@ export default {
   mounted() {
     this.gridApi = this.insideOptions.api;
     this.gridColumnApi = this.insideOptions.columnApi;
-    this.initMounted();
+    // this.initMounted();
   }
 };
 </script>
