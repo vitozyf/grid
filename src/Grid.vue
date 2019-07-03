@@ -124,7 +124,8 @@ export default {
       gridApi: null,
       columnApi: null,
       defaultColDef: {},
-      updatedDatas: []
+      updatedDatas: [],
+      editedDatas: []
     };
   },
 
@@ -137,6 +138,18 @@ export default {
       this.defaultColDef.resizable = true;
       this.defaultColDef.minWidth = 50;
       this.defaultColDef.suppressMovable = true;
+      // this.defaultColDef.cellStyle = params => {
+      //   // console.log(params.data.gold);
+      //   // console.log(this.editedDatas);
+      //   const { data } = params;
+      //   const IsEditedData = this.updatedDatas.find(
+      //     item => JSON.stringify(data) === JSON.stringify(item)
+      //   );
+      //   if (IsEditedData) {
+      //     return { backgroundColor: '#ffe174' };
+      //   }
+      //   return {};
+      // };
     },
     /**
      * 初始化表格(挂载后)
@@ -156,6 +169,18 @@ export default {
       ) {
         this.updatedDatas.push(updatedData);
       }
+    },
+    /**
+     * 增加编辑的数据
+     */
+    addEditedDatas(editedData) {
+      if (
+        !this.editedDatas.find(
+          item => JSON.stringify(item) === JSON.stringify(editedData)
+        )
+      ) {
+        this.editedDatas.push(editedData);
+      }
     }
   },
   created() {
@@ -168,7 +193,6 @@ export default {
     this.gridApi = this.insideOptions.api;
     this.gridColumnApi = this.insideOptions.columnApi;
     this.initMounted();
-    // console.log(this.$el.querySelector('.ag-overlay-no-rows-center'));
   }
 };
 </script>

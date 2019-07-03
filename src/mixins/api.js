@@ -9,6 +9,7 @@ export default {
      */
     setRowData(datas) {
       this.updatedDatas = [];
+      this.editedDatas = [];
       this.gridApi.setRowData(datas);
     },
     /**

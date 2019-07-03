@@ -14,7 +14,7 @@ const EventNames = [
   'onSelectionChanged',
   'onCellContextMenu',
   'onCellValueChanged',
-  'onCellEditingStarted',
+  'onCellEditingStopped',
   'onRowSelected'
 ];
 export default {
@@ -27,16 +27,17 @@ export default {
       }, 100);
       this.$emit('onGridReady', e);
     },
-    cellEditingStopped(e) {
-      const updatedDatas = this.updatedDatas;
-      if (
-        !updatedDatas.find(
-          item => JSON.stringify(item) === JSON.stringify(e.data)
-        )
-      ) {
-        this.updatedDatas.push(e.data);
+    cellEditingStarted(e) {
+      this.addEditedDatas(e.data);
+      this.$emit('onCellEditingStarted', e);
+    },
+    cellValueChanged(e) {
+      if (e.newValue !== e.oldValue) {
+        this.addUpdatedData(e.data);
+        // console.log(e);
+        // e.api.refreshCells([e.node], [e.column]);
       }
-      this.$emit('onCellEditingStopped', e);
+      this.$emit('onCellValueChanged', e);
     }
   },
   beforeMount() {
@@ -46,6 +47,7 @@ export default {
       };
     });
     this.gridOptions.onGridReady = this.gridReady;
-    this.gridOptions.onCellEditingStopped = this.cellEditingStopped;
+    this.gridOptions.onCellEditingStarted = this.cellEditingStarted;
+    this.gridOptions.onCellValueChanged = this.cellValueChanged;
   }
 };

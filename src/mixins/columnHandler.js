@@ -24,11 +24,6 @@ export default {
         }
         column.cellClass = cellClass;
 
-        // 通用表头
-        // if (!column.headerComponentFramework) {
-        //   column.headerComponentFramework = 'GridColumnHeader';
-        // }
-
         // 不可编辑列
         column.editable =
           column.editable === false ? false : this.type === 'edit';
@@ -49,10 +44,6 @@ export default {
           headerClass: 'grid-header-selection',
           resizable: false,
           suppressSizeToFit: true
-          // headerComponentFramework: 'GridColumnHeaderChecked',
-          // headerComponentParams: {
-          //   selectedRows: 111
-          // }
         });
       }
 

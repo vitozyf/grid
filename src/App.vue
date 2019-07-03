@@ -84,12 +84,18 @@ export default {
           headerName: 'Year',
           field: 'year',
           editable: true,
-          cellRenderer(params) {
+          valueFormatter(params) {
             if (params.value > 201910) {
-              return '展示中';
+              return '展示中1';
             }
-            return '未展示';
+            return '未展示2';
           }
+          // cellRenderer(params) {
+          //   if (params.value > 201910) {
+          //     return '展示中';
+          //   }
+          //   return '未展示';
+          // }
         },
         {
           headerName: 'Date',

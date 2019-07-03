@@ -57,14 +57,3 @@ Vue.component('GridColumnSelect', {
     return h('span', vm.params.value);
   }
 });
-
-/**
- * 默认自定义表头
- */
-Vue.component('GridColumnHeader', {
-  render(h) {
-    const vm = this;
-    const { colDef } = vm.params.column;
-    return h('span', colDef.headerName);
-  }
-});
