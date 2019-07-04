@@ -73,8 +73,8 @@ export default {
               key: 2,
               value: '人'
             }
-          ]
-          // cellRendererFramework: 'SquareComponent'
+          ],
+          editable: true
         },
         {
           headerName: 'Country',

@@ -1,7 +1,7 @@
 .ag-theme-balham {
-  .grid-select-cell {
+  .vito-grid-select-cell {
     padding: 0;
-    .grid-select {
+    .vito-grid-select {
       width: 100%;
       height: 100%;
       .el-input {
@@ -30,7 +30,7 @@
     }
   }
 }
-.grid-select-popper {
+.vito-grid-select-popper {
   margin-top: 3px !important;
   .popper__arrow {
     display: none;

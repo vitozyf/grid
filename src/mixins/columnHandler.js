@@ -9,17 +9,19 @@ export default {
 
         // 选择编辑组件
         if (column.dataMap && column.dataMap.length > 0) {
-          column.cellRendererFramework = 'GridColumnSelect';
-          column.cellRendererParams = {
-            addUpdatedData: this.addUpdatedData
+          column.cellEditorFramework = 'VitoGridColumnSelect';
+          column.valueFormatter = params => {
+            const CellMapItem = column.dataMap.find(
+              item => item.key === params.value
+            );
+            return CellMapItem ? CellMapItem.value : '';
           };
-          cellClass += ' grid-select-cell';
-          column.singleClickEdit = true;
+          cellClass += ' vito-grid-select-cell';
         }
 
         // 只读类
         if (column.editable === false && this.type === 'edit') {
-          cellClass += ' grid-column-readonly';
+          cellClass += ' vito-grid-column-readonly';
         }
         column.cellClass = cellClass;
 
@@ -39,14 +41,14 @@ export default {
           width: 40,
           pinned: 'left',
           editable: false,
-          headerClass: 'grid-header-selection',
+          headerClass: 'vito-grid-header-selection',
           resizable: false,
           suppressSizeToFit: true
         });
       }
 
       // 调用api设置列
-      // this.setColumnDefs(columns);
+      this.setColumnDefs(columns);
     },
 
     /**

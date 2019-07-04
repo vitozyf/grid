@@ -1,15 +1,11 @@
 .ag-theme-balham {
-  .grid-column-readonly {
+  .vito-grid-column-readonly {
     background-color: #f5f5f5;
   }
-  .ag-row-hover {
-    .grid-column-readonly {
-      background-color: #ecf0f1;
-    }
-  }
+  .ag-row-hover,
   .ag-row-selected {
-    .grid-column-readonly {
-      background-color: #d1f0ff;
+    .vito-grid-column-readonly {
+      background-color: #ecf0f1;
     }
   }
 }
