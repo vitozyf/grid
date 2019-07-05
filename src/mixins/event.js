@@ -1,6 +1,7 @@
 /**
  * 事件处理
  */
+import { valueAreEqual } from '../util/index';
 const EventNames = [
   'onCellClicked',
   'onCellDoubleClicked',
@@ -32,7 +33,7 @@ export default {
       this.$emit('onCellEditingStarted', e);
     },
     cellValueChanged(e) {
-      if (e.newValue !== e.oldValue) {
+      if (!valueAreEqual(e.newValue, e.oldValue)) {
         this.addUpdatedData(e.data);
       }
       this.$emit('onCellValueChanged', e);

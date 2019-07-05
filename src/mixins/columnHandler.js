@@ -2,6 +2,7 @@
  * 列处理
  */
 import VitoGridColumnSelect from '../components/VitoGridColumnSelect.vue';
+import { valueAreEqual } from '../util/index';
 export default {
   components: {
     VitoGridColumnSelect
@@ -38,6 +39,26 @@ export default {
 
         // 自动调整列宽时不包含设置宽度的列
         column.suppressSizeToFit = !!column.width;
+
+        // 单元格样式
+        const UserCellStyle = column.cellStyle;
+        column.cellStyle = params => {
+          let style = {};
+          if (this.cacheData[params.node.rowIndex]) {
+            if (
+              !valueAreEqual(
+                params.value,
+                this.cacheData[params.node.rowIndex][params.colDef.field]
+              )
+            ) {
+              style.backgroundColor = '#ffe174';
+            }
+          }
+          if (UserCellStyle) {
+            style = Object.assign({}, UserCellStyle(params), style);
+          }
+          return style;
+        };
       });
 
       // 选择列

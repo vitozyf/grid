@@ -48,7 +48,10 @@ export default {
         {
           headerName: 'Athlete',
           field: 'athlete',
-          cellClass: 'aaaaa'
+          cellClass: 'aaaaa',
+          cellStyle() {
+            return { color: 'blue' };
+          }
         },
         {
           headerName: 'Age',
@@ -211,10 +214,10 @@ export default {
           country: '中国',
           year: `2019${index}`,
           date: '2019-06-30',
-          sport: 'sport',
-          gold: 'gold',
-          silver: 'silver',
-          bronze: 'bronze',
+
+          gold: '',
+          silver: 0,
+          bronze: '0',
           total: 'total'
         });
       }

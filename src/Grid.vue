@@ -140,27 +140,13 @@ export default {
       this.defaultColDef.resizable = true;
       this.defaultColDef.minWidth = 50;
       this.defaultColDef.suppressMovable = true;
-      // this.defaultColDef.cellStyle = params => {
-      //   // console.log(params.data.gold);
-      //   if (params.value === 'vito0') {
-      //     console.log(params);
-      //   }
-      //   const { data } = params;
-      //   const IsEditedData = this.updatedDatas.find(
-      //     item => JSON.stringify(data) === JSON.stringify(item)
-      //   );
-      //   if (IsEditedData) {
-      //     return { backgroundColor: '#ffe174' };
-      //   }
-      //   return {};
-      // };
     },
     /**
      * 初始化表格(挂载后)
      */
     initMounted() {
       this.changeColumns(this.columns);
-      this.setCacheData();
+      this.setCacheData(this.datas);
     },
     /**
      * 增加已修改的数据集合
@@ -189,9 +175,9 @@ export default {
     /**
      * 设置数据缓存
      */
-    setCacheData() {
+    setCacheData(datas) {
       this.cacheData = Object.freeze(
-        this.datas.map(row => {
+        datas.map(row => {
           return { ...row };
         })
       );

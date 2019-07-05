@@ -11,10 +11,10 @@ export default {
      * 设置表格数据
      */
     setRowData(datas) {
+      this.setCacheData(datas);
       this.updatedDatas = [];
       this.editedDatas = [];
       this.gridApi.setRowData(datas);
-      this.setCacheData();
     },
     /**
      * 获取已修改的数据

@@ -9,7 +9,6 @@
 | headerHeight          | 表头高度                                             | 30                        | Number                                    |      |
 | rowHeight             | 单元格高度                                           | 25                        | Number                                    |      |
 | getRowHeight          | 单元格高度回调                                       |                           | Function                                  |      |
-| quickFilterText       | 使用此文本作为快速过滤器过滤行                       |                           | String                                    |      |
 | pinnedTopRowData      | 要在网格中显示为固定顶行的数据                       | []                        | Array                                     |      |
 | pinnedBottomRowData   | 要在网格中显示为固定底部行的数据。                   | []                        | Array                                     |      |
 | pageSize              | 每页行数                                             | 20                        | Number                                    |      |
@@ -47,7 +46,6 @@
 | cellClass                | 单元格的类                               |                | String, Function(String)  |      |
 | cellStyle                | 单元格样式                               |                | Object, Function(Object)  |      |
 | editable                 | 是否允许编辑                             | false          | Boolean                   |      |
-| singleClickEdit          | 单击后进入编辑模式                       | false          | Boolean                   |      |
 | dataMap                  | 单元格编辑格式为选择项                   | [{key, value}] | Array                     |      |
 | valueFormatter           | 数据过滤器(简单数据展示尽量使用此过滤器) |                | Function                  |      |
 | cellRenderer             | 渲染方法(直接返回数据或返回 html 字符串) |                | Function                  |      |
@@ -86,11 +84,12 @@
 | onRowSelected                                  | 行选择、取消选择后   |      |
 | onCellValueChanged                             | 单元格值改变         |      |
 
-### 已知问题
-
-- 编辑后的数据未加样式
-
 ### 更新记录
+
+#### 1.0.3
+
+- 优化选择编辑器
+- 增加修改数据后的单元格样式
 
 #### 1.0.2
 

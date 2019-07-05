@@ -7,6 +7,9 @@
   .vito-grid-select-row {
     line-height: 30px;
     cursor: pointer;
+    text-align: left;
+    padding-left: 3px;
+    box-sizing: border-box;
     &:hover {
       background-color: #f5f7fa;
     }
