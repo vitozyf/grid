@@ -1,7 +1,11 @@
 /**
  * 列处理
  */
+import VitoGridColumnSelect from '../components/VitoGridColumnSelect';
 export default {
+  components: {
+    VitoGridColumnSelect
+  },
   methods: {
     changeColumns(columns) {
       columns.forEach(column => {
@@ -18,6 +22,9 @@ export default {
           };
           cellClass += ' vito-grid-select-cell';
         }
+        // else {
+        //   column.cellEditorFramework = 'VitoGridColumnInput';
+        // }
 
         // 只读类
         if (column.editable === false && this.type === 'edit') {

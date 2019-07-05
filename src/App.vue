@@ -58,7 +58,6 @@ export default {
           field: 'age',
           headerClass: 'abc',
           resizable: false,
-          editable: true,
           width: 100,
           dataMap: [
             {

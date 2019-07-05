@@ -33,7 +33,7 @@
 </template>
 <script>
 import { AgGridVue } from 'ag-grid-vue';
-import './scripts/SquareComponent';
+import ElPagination from 'element-ui/lib/pagination';
 import Event from './mixins/event';
 import columnHandler from './mixins/columnHandler';
 import api from './mixins/api';
@@ -41,7 +41,8 @@ export default {
   name: 'Grid',
 
   components: {
-    AgGridVue
+    AgGridVue,
+    ElPagination
   },
 
   mixins: [Event, columnHandler, api],
@@ -93,6 +94,7 @@ export default {
       default: 1
     },
     onPageChanged: Function,
+    // 空数据模版
     overlayNoRowsTemplate: {
       type: String,
       default: '<span>暂无数据</span>'
@@ -159,7 +161,6 @@ export default {
     initMounted() {
       this.changeColumns(this.columns);
     },
-
     /**
      * 增加已修改的数据集合
      */

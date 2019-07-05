@@ -1,8 +1,9 @@
 @import '../styles/ag-grid.scss';
 @import '../styles/ag-theme-balham.scss';
-@import './grid-otherui.scss';
+@import './grid-elementui.scss';
 @import './grid.scss';
-@import './grid-column-select.scss';
+@import './grid-cell-select.scss';
+@import './grid-cell-input.scss';
 @import './grid-column-readonly.scss';
 @import './grid-header.scss';
 @import './grid-pagination.scss';
