@@ -14,6 +14,7 @@ export default {
       this.updatedDatas = [];
       this.editedDatas = [];
       this.gridApi.setRowData(datas);
+      this.setCacheData();
     },
     /**
      * 获取已修改的数据

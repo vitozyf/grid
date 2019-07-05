@@ -20,8 +20,6 @@
         ref="table"
         type="edit"
         :getRowClass="getRowClass"
-        :pagination="true"
-        :suppressPaginationPanel="true"
         :total-count="10000"
         :page-size="20"
         :page-index="1"
@@ -42,7 +40,6 @@ import Grid from './index.js';
 // import './components/SquareComponent';
 // const Grid = require('./index.js').default;
 Vue.component('Grid', Grid);
-
 export default {
   name: 'app',
   data() {
@@ -58,7 +55,7 @@ export default {
           field: 'age',
           headerClass: 'abc',
           resizable: false,
-          width: 100,
+          width: 120,
           dataMap: [
             {
               key: 0,
@@ -144,6 +141,7 @@ export default {
     },
     getUpdatedDatas() {
       console.log(this.$refs.table.getUpdatedDatas());
+      console.log(this.$refs.table.cacheData);
     },
     setDataSource() {
       const Datas = [];

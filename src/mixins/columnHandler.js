@@ -1,7 +1,7 @@
 /**
  * 列处理
  */
-import VitoGridColumnSelect from '../components/VitoGridColumnSelect';
+import VitoGridColumnSelect from '../components/VitoGridColumnSelect.vue';
 export default {
   components: {
     VitoGridColumnSelect

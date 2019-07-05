@@ -38,4 +38,19 @@ $-border-color: #d9dcde !default;
   .ag-input-text-wrapper input[type='text'] {
     border: none;
   }
+  .ag-popup {
+    height: auto;
+    & > div {
+      box-shadow: none;
+      border: none;
+    }
+  }
+  ul,
+  li {
+    border: none;
+    outline: none;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
 }

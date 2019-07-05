@@ -13,12 +13,11 @@
       :enterMovesDownAfterEdit="true"
       :rowMultiSelectWithClick="false"
       :suppressRowClickSelection="true"
-      :paginationPageSize="200"
       rowSelection="multiple"
       :singleClickEdit="true"
       :overlayNoRowsTemplate="overlayNoRowsTemplate"
+      :stopEditingWhenGridLosesFocus="true"
     ></ag-grid-vue>
-    <!-- :stopEditingWhenGridLosesFocus="true" -->
     <el-pagination
       v-if="!!onPageChanged"
       small
@@ -127,7 +126,8 @@ export default {
       columnApi: null,
       defaultColDef: {},
       updatedDatas: [],
-      editedDatas: []
+      editedDatas: [],
+      cacheData: []
     };
   },
 
@@ -160,6 +160,7 @@ export default {
      */
     initMounted() {
       this.changeColumns(this.columns);
+      this.setCacheData();
     },
     /**
      * 增加已修改的数据集合
@@ -184,6 +185,16 @@ export default {
       ) {
         this.editedDatas.push(editedData);
       }
+    },
+    /**
+     * 设置数据缓存
+     */
+    setCacheData() {
+      this.cacheData = Object.freeze(
+        this.datas.map(row => {
+          return { ...row };
+        })
+      );
     }
   },
   created() {
