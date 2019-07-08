@@ -66,6 +66,7 @@
 | selectAll()           | 全选                                                                |
 | deselectAll()         | 清除选择                                                            |
 | forEachNode(callBack) | 遍历 node 节点(选择部分数据时，调用回调方法参数的`setSelected`方法) |
+| updateRowData()       | 外部更新数据， 参数（数据 Array 或单条数据）                        |
 
 ### 事件
 
@@ -87,6 +88,10 @@
 | onFirstDataRendered                            | 数据第一次渲染后     |      |
 
 ### 更新记录
+
+#### 1.0.5
+
+- 增加`updateRowData`外部数据更新方法
 
 #### 1.0.4
 

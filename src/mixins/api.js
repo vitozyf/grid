@@ -32,13 +32,26 @@ export default {
      * 全选数据
      */
     selectAll() {
-      return this.gridAPi.selectAll();
+      return this.gridApi.selectAll();
     },
     /**
      * 清除所有选择
      */
     deselectAll() {
-      return this.gridAPi.deselectAll();
+      return this.gridApi.deselectAll();
+    },
+    /**
+     * 更新行数据
+     */
+    updateRowData(rows) {
+      if (rows instanceof Array) {
+        rows.forEach(item => {
+          this.addUpdatedData(item);
+        });
+      } else if (rows instanceof Object) {
+        this.addUpdatedData(rows);
+      }
+      return this.gridApi.updateRowData(rows);
     }
     /**
      * 修改列配置

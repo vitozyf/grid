@@ -2,7 +2,7 @@
   <div id="app">
     <div class="header">
       <button @click="addNew">新增一行</button>
-      <button @click="clickHandler">已选数据</button>
+      <button @click="getSelectedRows">已选数据</button>
       <button @click="getModel">获取行模型</button>
       <button @click="paginationGetPageSize">每页行数</button>
       <button @click="setDataSource">设置数据</button>
@@ -10,6 +10,7 @@
       <button @click="updateColumn">更新列状态</button>
       <button @click="forEachNode">选择部分数据</button>
       <button @click="selectAllType">全选项</button>
+      <button @click="updateRowData">更新行数据</button>
     </div>
     <div :style="{height: '800px', padding: '0 10px'}">
 
@@ -27,6 +28,7 @@
         :onPageChanged="onPageChanged"
         @onCellClicked="onCellClicked"
         :selectConfig="selectConfig"
+        :gridOptions="gridOptions"
       ></grid>
       <!-- domLayout='autoHeight' -->
     </div>
@@ -46,6 +48,7 @@ export default {
   name: 'app',
   data() {
     return {
+      gridOptions: null,
       columns: [
         {
           headerName: 'Athlete',
@@ -129,6 +132,12 @@ export default {
     };
   },
   methods: {
+    updateRowData() {
+      this.datas[0].athlete = 999;
+      this.datas[1].athlete = 888;
+      // console.log(this.$refs.table.updateRowData);
+      this.$refs.table.updateRowData([this.datas[0], this.datas[1]]);
+    },
     selectAllType() {
       console.log(this.selectConfig);
     },
@@ -188,9 +197,9 @@ export default {
       }
       return '';
     },
-    clickHandler() {
+    getSelectedRows() {
       // const gridOptions = this.$refs.table.gridOptions;
-      console.log(this.$refs.table.gridApi.getSelectedRows());
+      console.log(this.$refs.table.getSelectedRows());
       // this.$refs.table.gridApi.deselectAll();
 
       // this.$refs.table.gridColumnApi.autoSizeColumns();
@@ -233,6 +242,7 @@ export default {
   },
   created() {
     this.getDatas();
+    this.gridOptions = {};
   }
 };
 </script>
