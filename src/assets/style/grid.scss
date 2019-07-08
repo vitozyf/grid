@@ -53,4 +53,9 @@ $-border-color: #d9dcde !default;
     margin: 0;
     padding: 0;
   }
+  .vito-grid-cell-selection {
+    .ag-cell-wrapper {
+      justify-content: center;
+    }
+  }
 }

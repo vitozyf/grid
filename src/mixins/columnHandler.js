@@ -2,10 +2,12 @@
  * 列处理
  */
 import VitoGridColumnSelect from '../components/VitoGridColumnSelect.vue';
+import VitoGridColumnCheckHeader from '../components/VitoGridColumnCheckHeader.vue';
 import { valueAreEqual } from '../util/index';
 export default {
   components: {
-    VitoGridColumnSelect
+    VitoGridColumnSelect,
+    VitoGridColumnCheckHeader
   },
   methods: {
     changeColumns(columns) {
@@ -62,17 +64,29 @@ export default {
       });
 
       // 选择列
-      if (this.selection && !columns.find(item => item.checkboxSelection)) {
-        columns.unshift({
+      if (
+        this.selection &&
+        !columns.find(item => item.checkboxSelection) &&
+        columns.length > 0
+      ) {
+        const CheckedColumn = {
           checkboxSelection: true,
           headerCheckboxSelection: true,
-          width: 40,
+          width: !this.selectConfig ? 40 : 46,
           pinned: 'left',
           editable: false,
           headerClass: 'vito-grid-header-selection',
+          cellClass: 'vito-grid-cell-selection',
           resizable: false,
           suppressSizeToFit: true
-        });
+        };
+        if (this.selectConfig) {
+          CheckedColumn.headerComponentFramework = 'VitoGridColumnCheckHeader';
+          CheckedColumn.headerComponentParams = {
+            selectConfig: this.selectConfig
+          };
+        }
+        columns.unshift(CheckedColumn);
       }
 
       // 调用api设置列

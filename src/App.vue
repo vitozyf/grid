@@ -9,8 +9,9 @@
       <button @click="getUpdatedDatas">获取修改数据</button>
       <button @click="updateColumn">更新列状态</button>
       <button @click="forEachNode">选择部分数据</button>
+      <button @click="selectAllType">全选项</button>
     </div>
-    <div :style="{height: '800px'}">
+    <div :style="{height: '800px', padding: '0 10px'}">
 
       <grid
         :columns="columns"
@@ -25,6 +26,7 @@
         :page-index="1"
         :onPageChanged="onPageChanged"
         @onCellClicked="onCellClicked"
+        :selectConfig="selectConfig"
       ></grid>
       <!-- domLayout='autoHeight' -->
     </div>
@@ -122,10 +124,14 @@ export default {
           field: 'total'
         }
       ],
-      datas: []
+      datas: [],
+      selectConfig: {}
     };
   },
   methods: {
+    selectAllType() {
+      console.log(this.selectConfig);
+    },
     forEachNode() {
       this.$refs.table.forEachNode(node => {
         if (node.data.year < 201910) {

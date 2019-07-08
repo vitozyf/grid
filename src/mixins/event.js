@@ -25,7 +25,7 @@ export default {
       const TIMEID = setTimeout(() => {
         this.gridApi.sizeColumnsToFit();
         clearTimeout(TIMEID);
-      }, 100);
+      }, 150);
       this.$emit('onGridReady', e);
     },
     cellEditingStarted(e) {
@@ -37,6 +37,10 @@ export default {
         this.addUpdatedData(e.data);
       }
       this.$emit('onCellValueChanged', e);
+    },
+    firstDataRendered(e) {
+      this.gridApi.sizeColumnsToFit();
+      this.$emit('onFirstDataRendered', e);
     }
   },
   beforeMount() {
@@ -48,5 +52,6 @@ export default {
     this.gridOptions.onGridReady = this.gridReady;
     this.gridOptions.onCellEditingStarted = this.cellEditingStarted;
     this.gridOptions.onCellValueChanged = this.cellValueChanged;
+    this.gridOptions.onFirstDataRendered = this.firstDataRendered;
   }
 };

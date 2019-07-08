@@ -1,11 +1,52 @@
 .ag-theme-balham {
+  // 选择表头
+  .vito-grid-check-header {
+    position: absolute;
+    right: 0px;
+    bottom: 1px;
+    cursor: pointer;
+  }
+
+  // 表头
   .ag-header-cell-label,
   .ag-header-cell {
     text-align: center;
-    justify-content: center;
     color: #000000a6;
+    justify-content: center;
   }
-  .vito-grid-header-selection {
-    justify-content: left;
+  .ag-header-select-all {
+    margin-right: 0;
+  }
+  // .vito-grid-header-selection {
+  //   padding: 0 5px;
+  // }
+}
+.vito-grid-headerchech-popper {
+  font-size: 12px;
+  li {
+    line-height: 22px;
+    padding: 0 10px;
+    cursor: pointer;
+    text-align: center;
+    box-sizing: border-box;
+    padding-left: 20px;
+    position: relative;
+    &:hover {
+      background-color: #f5f7fa;
+    }
+    .el-icon-check {
+      position: absolute;
+      left: 5px;
+      top: 5px;
+      color: #3d902d;
+    }
+    &.active {
+      background-color: #ed9e00;
+      color: #fff;
+      font-weight: 700;
+      .el-icon-check {
+        color: #fff;
+      }
+    }
   }
 }

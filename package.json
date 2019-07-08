@@ -1,6 +1,6 @@
 {
   "name": "vito-grid",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "license": "MIT",
   "private": false,
   "main": "dist/grid.umd.min.js",

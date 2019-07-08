@@ -97,6 +97,9 @@ export default {
     overlayNoRowsTemplate: {
       type: String,
       default: '<span>暂无数据</span>'
+    },
+    selectConfig: {
+      type: Object
     }
   },
 
