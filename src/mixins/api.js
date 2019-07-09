@@ -52,6 +52,18 @@ export default {
         this.addUpdatedData(rows);
       }
       return this.gridApi.updateRowData(rows);
+    },
+    /**
+     * 设置单元格焦点
+     */
+    setFocusedCell(rowIndex, colKey) {
+      return this.gridApi.setFocusedCell(rowIndex, colKey);
+    },
+    /**
+     * 开始编辑单元格
+     */
+    startEditingCell(rowIndex, colKey) {
+      return this.gridApi.startEditingCell({ rowIndex, colKey });
     }
     /**
      * 修改列配置

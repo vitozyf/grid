@@ -62,16 +62,18 @@
 
 ### API(调用必须在表格组件挂载后)
 
-| 方法                  | 说明                                                                |
-| --------------------- | ------------------------------------------------------------------- |
-| setRowData(datas)     | 修改表格数据（初始化赋值、翻页或整体修改时，清除缓存的已更新数据）  |
-| getUpdatedDatas()     | 获取修改的数据                                                      |
-| changeColumns()       | 修改列配置                                                          |
-| getSelectedRows()     | 获取选择的数据                                                      |
-| selectAll()           | 全选                                                                |
-| deselectAll()         | 清除选择                                                            |
-| forEachNode(callBack) | 遍历 node 节点(选择部分数据时，调用回调方法参数的`setSelected`方法) |
-| updateRowData()       | 外部更新数据， 参数（数据 Array 或单条数据）                        |
+| 方法                               | 说明                                                                |
+| ---------------------------------- | ------------------------------------------------------------------- |
+| setRowData(datas)                  | 修改表格数据（初始化赋值、翻页或整体修改时，清除缓存的已更新数据）  |
+| getUpdatedDatas()                  | 获取修改的数据                                                      |
+| changeColumns()                    | 修改列配置                                                          |
+| getSelectedRows()                  | 获取选择的数据                                                      |
+| selectAll()                        | 全选                                                                |
+| deselectAll()                      | 清除选择                                                            |
+| forEachNode(callBack)              | 遍历 node 节点(选择部分数据时，调用回调方法参数的`setSelected`方法) |
+| updateRowData()                    | 外部更新数据， 参数（数据 Array 或单条数据）                        |
+| setFocusedCell(rowIndex, colKey)   | 设置单元格焦点                                                      |
+| startEditingCell(rowIndex, colKey) | 开始编辑单元格                                                      |
 
 ### 事件
 
@@ -93,6 +95,10 @@
 | onFirstDataRendered                            | 数据第一次渲染后     |      |
 
 ### 更新记录
+
+#### 1.0.6
+
+- 增加`setFocusedCell`、`startEditingCell` API
 
 #### 1.0.5
 

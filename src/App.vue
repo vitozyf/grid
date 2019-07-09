@@ -1,5 +1,8 @@
 <template>
-  <div id="app">
+  <div
+    id="app"
+    class="appdemo"
+  >
     <div class="header">
       <button @click="addNew">新增一行</button>
       <button @click="getSelectedRows">已选数据</button>
@@ -11,6 +14,7 @@
       <button @click="forEachNode">选择部分数据</button>
       <button @click="selectAllType">全选项</button>
       <button @click="updateRowData">更新行数据</button>
+      <button @click="startEditingCell">编辑API</button>
     </div>
     <div :style="{height: '800px', padding: '0 10px'}">
 
@@ -112,7 +116,8 @@ export default {
         },
         {
           headerName: 'Gold',
-          field: 'gold'
+          field: 'gold',
+          cellClass: 'bg-orange'
         },
         {
           headerName: 'Silver',
@@ -132,6 +137,10 @@ export default {
     };
   },
   methods: {
+    startEditingCell() {
+      this.$refs.table.setFocusedCell(0, 'sport');
+      this.$refs.table.startEditingCell(0, 'sport');
+    },
     updateRowData() {
       this.datas[0].athlete = 999;
       this.datas[1].athlete = 888;
@@ -263,6 +272,11 @@ html {
   width: 100%;
   .header {
     line-height: 30px;
+  }
+}
+.appdemo {
+  .bg-orange {
+    background-color: #fcf4e7;
   }
 }
 </style>
