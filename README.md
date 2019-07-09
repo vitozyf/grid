@@ -31,6 +31,11 @@
 | overlayNoRowsTemplate | 空数据 html 模版                                                | `'<span>暂无数据</span>'` | String                                    |      |
 | selectConfig          | 选择项(选择本页(type='CurrentPage')，选择全部(type='AllPages')) |                           | Object                                    |      |
 
+#### 注意问题
+
+- 属性`datas`在组件内部有数据缓存，因此每次整体更换数据时需要调用`setRowData(datas)`方法设置数据，以清除缓存。
+- 属性`columns`需要经过内部过滤器处理，因此如果初始设置后，还需要更改列配置（如从服务端获取某些列配置）需要调用`changeColumns(columns)`方法重新设置列
+
 ### `columns`列属性
 
 | 参数                     | 说明                                     | 默认值         | 类型                      | 参数 |
