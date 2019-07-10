@@ -14,7 +14,10 @@ export default {
       this.setCacheData(datas);
       this.updatedDatas = [];
       this.editedDatas = [];
-      this.gridApi.setRowData(datas);
+      const TimeID = setTimeout(() => {
+        this.gridApi.setRowData(datas);
+        clearTimeout(TimeID);
+      }, 0);
     },
     /**
      * 获取已修改的数据

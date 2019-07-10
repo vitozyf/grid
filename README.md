@@ -96,6 +96,10 @@
 
 ### 更新记录
 
+#### 1.0.7
+
+- 优化`setRowData`方法数据缓存有时不及时的问题
+
 #### 1.0.6
 
 - 增加`setFocusedCell`、`startEditingCell` API

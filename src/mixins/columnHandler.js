@@ -3,7 +3,7 @@
  */
 import VitoGridColumnSelect from '../components/VitoGridColumnSelect.vue';
 import VitoGridColumnCheckHeader from '../components/VitoGridColumnCheckHeader.vue';
-import { valueAreEqual } from '../util/index';
+import { valueIsEqual } from '../util/index';
 export default {
   components: {
     VitoGridColumnSelect,
@@ -25,9 +25,6 @@ export default {
           };
           cellClass += ' vito-grid-select-cell';
         }
-        // else {
-        //   column.cellEditorFramework = 'VitoGridColumnInput';
-        // }
 
         // 只读类
         if (column.editable === false && this.type === 'edit') {
@@ -48,11 +45,12 @@ export default {
           let style = {};
           if (this.cacheData[params.node.rowIndex]) {
             if (
-              !valueAreEqual(
+              !valueIsEqual(
                 params.value,
                 this.cacheData[params.node.rowIndex][params.colDef.field]
               )
             ) {
+              console.log(params);
               style.backgroundColor = '#ffe174';
             }
           }

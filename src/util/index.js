@@ -1,4 +1,4 @@
-export function valueAreEqual(val1, val2) {
+export function valueIsEqual(val1, val2) {
   if (!isNaN(val1) && !isNaN(val2)) {
     return Number(val1) === Number(val2);
   }
