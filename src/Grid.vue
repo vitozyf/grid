@@ -1,5 +1,8 @@
 <template>
-  <div class="grid-container">
+  <div
+    class="grid-container"
+    @contextmenu="oncontextmenu"
+  >
     <ag-grid-vue
       class="ag-theme-balham"
       v-bind="$attrs"
@@ -28,6 +31,11 @@
       @current-change="onPageChanged"
     >
     </el-pagination>
+    <VitoGridRightMenu
+      :RightMenuConfig="RightMenuConfig"
+      :contextMenuParams="contextMenuParams"
+      :enableContextmenu="enableContextmenu"
+    ></VitoGridRightMenu>
   </div>
 </template>
 <script>
@@ -36,12 +44,15 @@ import ElPagination from 'element-ui/lib/pagination';
 import Event from './mixins/event';
 import columnHandler from './mixins/columnHandler';
 import api from './mixins/api';
+import VitoGridRightMenu from './components/VitoGridRightMenu';
+import copy from './util/clipboard';
 export default {
   name: 'Grid',
 
   components: {
     AgGridVue,
-    ElPagination
+    ElPagination,
+    VitoGridRightMenu
   },
 
   mixins: [Event, columnHandler, api],
@@ -100,6 +111,16 @@ export default {
     },
     selectConfig: {
       type: Object
+    },
+    enableContextmenu: {
+      type: Boolean,
+      default: true
+    },
+    contextmenu: {
+      type: Array,
+      default() {
+        return [];
+      }
     }
   },
 
@@ -122,6 +143,12 @@ export default {
     }
   },
 
+  watch: {
+    contextmenu() {
+      this.dealContextmenus();
+    }
+  },
+
   data() {
     return {
       insideOptions: null,
@@ -130,7 +157,54 @@ export default {
       defaultColDef: {},
       updatedDatas: [],
       editedDatas: [],
-      cacheData: []
+      cacheData: [],
+      RightMenuConfig: {
+        visible: false,
+        pageX: 0,
+        pageY: 0,
+        menus: [
+          {
+            text: '复制单元格',
+            click(params) {
+              copy(params.value, {
+                debug: process.env.NODE_ENV === 'development'
+              });
+            }
+          },
+          {
+            text: '复制当前行',
+            click(params) {
+              let Text = '';
+              for (const key in params.data) {
+                if (params.data.hasOwnProperty(key)) {
+                  Text += params.data[key] + '\t';
+                }
+              }
+              copy(Text, {
+                debug: process.env.NODE_ENV === 'development'
+              });
+            }
+          },
+          {
+            text: '复制选中行',
+            click(params) {
+              const SelectRows = params.api.getSelectedRows();
+              let Text = '';
+              SelectRows.forEach(item => {
+                for (const key in item) {
+                  if (item.hasOwnProperty(key)) {
+                    Text += item[key] + '\t';
+                  }
+                }
+                Text += '\n';
+              });
+              copy(Text, {
+                debug: process.env.NODE_ENV === 'development'
+              });
+            }
+          }
+        ]
+      }
     };
   },
 
@@ -184,10 +258,25 @@ export default {
           return { ...row };
         })
       );
+    },
+    /**
+     * 阻止浏览器默认右击事件
+     */
+    oncontextmenu(event) {
+      const e = event || window.event;
+      e.cancelBubble = true;
+      e.returnValue = false;
+      return false;
+    },
+    dealContextmenus() {
+      this.RightMenuConfig.menus = this.RightMenuConfig.menus.concat(
+        this.contextmenu
+      );
     }
   },
   created() {
     this.initCreated();
+    this.dealContextmenus();
   },
   beforeMount() {
     this.insideOptions = {};

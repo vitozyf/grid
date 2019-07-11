@@ -19,13 +19,23 @@ const EventNames = [
   'onRowSelected'
 ];
 export default {
+  data() {
+    return {
+      SizeColumnsToFitTimeID: null,
+      contextMenuParams: null
+    };
+  },
   methods: {
-    gridReady(e) {
+    sizeColumnsToFit() {
       // 设置自适应列宽
-      const TIMEID = setTimeout(() => {
+      clearTimeout(this.SizeColumnsToFitTimeID);
+      this.SizeColumnsToFitTimeID = setTimeout(() => {
         this.gridApi.sizeColumnsToFit();
-        clearTimeout(TIMEID);
+        clearTimeout(this.SizeColumnsToFitTimeID);
       }, 150);
+    },
+    gridReady(e) {
+      this.sizeColumnsToFit();
       this.$emit('onGridReady', e);
     },
     cellEditingStarted(e) {
@@ -41,6 +51,21 @@ export default {
     firstDataRendered(e) {
       this.gridApi.sizeColumnsToFit();
       this.$emit('onFirstDataRendered', e);
+    },
+    gridSizeChanged(e) {
+      this.sizeColumnsToFit();
+      this.$emit('onGridSizeChanged', e);
+    },
+    cellContextMenu(e) {
+      const event = e.event;
+      Object.assign(this.RightMenuConfig, {
+        visible: true,
+        pageX: event.pageX,
+        pageY: event.pageY
+      });
+      this.contextMenuParams = e;
+      this.setFocusedCell(e.rowIndex, e.column.colId);
+      this.$emit('onCellContextMenu', e);
     }
   },
   beforeMount() {
@@ -53,5 +78,7 @@ export default {
     this.gridOptions.onCellEditingStarted = this.cellEditingStarted;
     this.gridOptions.onCellValueChanged = this.cellValueChanged;
     this.gridOptions.onFirstDataRendered = this.firstDataRendered;
+    this.gridOptions.onGridSizeChanged = this.gridSizeChanged;
+    this.gridOptions.onCellContextMenu = this.cellContextMenu;
   }
 };

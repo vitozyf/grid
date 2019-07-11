@@ -1,5 +1,4 @@
 import Grid from './Grid.vue';
-
 /* istanbul ignore next */
 Grid.install = function(Vue) {
   if (Vue) {

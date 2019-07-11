@@ -33,6 +33,7 @@
         @onCellClicked="onCellClicked"
         :selectConfig="selectConfig"
         :gridOptions="gridOptions"
+        :contextmenu="contextmenu"
       ></grid>
       <!-- domLayout='autoHeight' -->
     </div>
@@ -133,7 +134,8 @@ export default {
         }
       ],
       datas: [],
-      selectConfig: {}
+      selectConfig: {},
+      contextmenu: []
     };
   },
   methods: {
@@ -252,7 +254,36 @@ export default {
   created() {
     this.getDatas();
     this.gridOptions = {};
+    // this.contextmenu = [
+    //   {
+    //     text: '测试',
+    //     click(e) {
+    //       console.log(333, e);
+    //     }
+    //   }
+    // ];
+    // setTimeout(() => {
+    //   this.contextmenu = [
+    //     {
+    //       text: '测试1',
+    //       click(e) {
+    //         console.log(444, e);
+    //       }
+    //     }
+    //   ];
+    // }, 2000);
   }
+  // mounted() {
+  //   document.oncontextmenu = function(e) {
+  //     console.log(123);
+  //     var e = e || window.event;
+  //     //阻止冒泡
+  //     e.cancelBubble = true;
+  //     //阻止触发默认事件
+  //     e.returnValue = false;
+  //     return false;
+  //   };
+  // }
 };
 </script>
 
