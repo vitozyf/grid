@@ -16,6 +16,9 @@
       <button @click="updateRowData">更新行数据</button>
       <button @click="startEditingCell">编辑API</button>
     </div>
+    <div class="header">
+      <button @click="moveColumn">移动列</button>
+    </div>
     <div :style="{height: '800px', padding: '0 10px'}">
 
       <grid
@@ -30,11 +33,13 @@
         :page-size="20"
         :page-index="1"
         :onPageChanged="onPageChanged"
-        @onCellClicked="onCellClicked"
         :selectConfig="selectConfig"
         :gridOptions="gridOptions"
         :contextmenu="contextmenu"
+        @onCellClicked="onCellClicked"
+        @onColumnMoved="onColumnMoved"
       ></grid>
+
       <!-- domLayout='autoHeight' -->
     </div>
   </div>
@@ -48,7 +53,9 @@ import Grid from './index.js';
 // const Grid = require('../dist/grid.umd.min.js').default;
 // import './components/SquareComponent';
 // const Grid = require('./index.js').default;
+
 Vue.component('Grid', Grid);
+
 export default {
   name: 'app',
   data() {
@@ -59,6 +66,7 @@ export default {
           headerName: 'Athlete',
           field: 'athlete',
           cellClass: 'aaaaa',
+          rowDrag: true,
           cellStyle() {
             return { color: 'blue' };
           }
@@ -69,6 +77,7 @@ export default {
           headerClass: 'abc',
           resizable: false,
           width: 120,
+          suppressMovable: true,
           dataMap: [
             {
               key: 0,
@@ -139,6 +148,12 @@ export default {
     };
   },
   methods: {
+    moveColumn() {
+      this.$refs.table.moveColumns(['age', 'year'], 8);
+    },
+    onColumnMoved(a, b, c) {
+      console.log(a, b, c);
+    },
     startEditingCell() {
       this.$refs.table.setFocusedCell(0, 'sport');
       this.$refs.table.startEditingCell(0, 'sport');

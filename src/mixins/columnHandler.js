@@ -75,7 +75,9 @@ export default {
           headerClass: 'vito-grid-header-selection',
           cellClass: 'vito-grid-cell-selection',
           resizable: false,
-          suppressSizeToFit: true
+          suppressSizeToFit: true,
+          lockPosition: true,
+          suppressMovable: true
         };
         if (this.selectConfig) {
           CheckedColumn.headerComponentFramework = 'VitoGridColumnCheckHeader';

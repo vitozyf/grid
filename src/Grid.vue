@@ -216,7 +216,7 @@ export default {
       this.defaultColDef.editable = this.type === 'edit';
       this.defaultColDef.resizable = true;
       this.defaultColDef.minWidth = 50;
-      this.defaultColDef.suppressMovable = true;
+      // this.defaultColDef.suppressMovable = true;
     },
     /**
      * 初始化表格(挂载后)

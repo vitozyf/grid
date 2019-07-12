@@ -67,6 +67,18 @@ export default {
      */
     startEditingCell(rowIndex, colKey) {
       return this.gridApi.startEditingCell({ rowIndex, colKey });
+    },
+    /**
+     * 移动列
+     */
+    moveColumn(key, toIndex) {
+      return this.gridColumnApi.moveColumn(key, toIndex);
+    },
+    moveColumns(keys, toIndex) {
+      return this.gridColumnApi.moveColumns(keys, toIndex);
+    },
+    moveColumnByIndex(fromIndex, toIndex) {
+      return this.gridColumnApi.moveColumnByIndex(fromIndex, toIndex);
     }
     /**
      * 修改列配置
