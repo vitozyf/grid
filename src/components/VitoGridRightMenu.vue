@@ -7,8 +7,6 @@
       class="vito-grid-right-menu"
       v-show="RightMenuConfig.visible"
       :style="menuStyle"
-      tabindex="-1"
-      @blur="RightMenuConfig.visible = false"
       @click="rightMenuEventHandler"
     >
       <ul>
@@ -46,17 +44,6 @@ export default {
     },
     visible() {
       return this.RightMenuConfig.visible;
-    }
-  },
-  watch: {
-    visible(val) {
-      if (val) {
-        this.$nextTick(() => {
-          if (this.$el && this.$el.focus) {
-            this.$el.focus();
-          }
-        });
-      }
     }
   },
   methods: {

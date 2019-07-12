@@ -50,7 +50,6 @@ export default {
                 this.cacheData[params.node.rowIndex][params.colDef.field]
               )
             ) {
-              console.log(params);
               style.backgroundColor = '#ffe174';
             }
           }

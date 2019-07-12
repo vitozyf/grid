@@ -9,7 +9,6 @@ const EventNames = [
   'onCellMouseOver',
   'onCellMouseOut',
   'onCellMouseDown',
-  'onRowClicked',
   'onRowDoubleClicked',
   'onRowSelected',
   'onSelectionChanged',
@@ -33,6 +32,10 @@ export default {
         this.gridApi.sizeColumnsToFit();
         clearTimeout(this.SizeColumnsToFitTimeID);
       }, 150);
+    },
+    rowClicked(e) {
+      this.RightMenuConfig.visible = false;
+      this.$emit('onRowClicked', e);
     },
     gridReady(e) {
       this.sizeColumnsToFit();
@@ -64,7 +67,6 @@ export default {
         pageY: event.pageY
       });
       this.contextMenuParams = e;
-      this.setFocusedCell(e.rowIndex, e.column.colId);
       this.$emit('onCellContextMenu', e);
     }
   },
@@ -74,6 +76,7 @@ export default {
         this.$emit(name, e);
       };
     });
+    this.gridOptions.onRowClicked = this.rowClicked;
     this.gridOptions.onGridReady = this.gridReady;
     this.gridOptions.onCellEditingStarted = this.cellEditingStarted;
     this.gridOptions.onCellValueChanged = this.cellValueChanged;
