@@ -1,6 +1,7 @@
 <template>
   <div
     class="grid-container"
+    @click.stop="gridContainerClickHandler"
     @contextmenu="oncontextmenu"
   >
     <ag-grid-vue
@@ -216,7 +217,6 @@ export default {
       this.defaultColDef.editable = this.type === 'edit';
       this.defaultColDef.resizable = true;
       this.defaultColDef.minWidth = 50;
-      // this.defaultColDef.suppressMovable = true;
     },
     /**
      * 初始化表格(挂载后)
@@ -268,10 +268,16 @@ export default {
       e.returnValue = false;
       return false;
     },
+    /**
+     * 合并用户的右键菜单
+     */
     dealContextmenus() {
       this.RightMenuConfig.menus = this.RightMenuConfig.menus.concat(
         this.contextmenu
       );
+    },
+    gridContainerClickHandler() {
+      this.RightMenuConfig.visible = false;
     }
   },
   created() {

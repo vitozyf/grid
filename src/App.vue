@@ -24,7 +24,6 @@
       <grid
         :columns="columns"
         :datas="datas"
-        :headerHeight="28"
         :selection="true"
         ref="table"
         type="edit"
@@ -33,11 +32,9 @@
         :page-size="20"
         :page-index="1"
         :onPageChanged="onPageChanged"
-        :selectConfig="selectConfig"
         :gridOptions="gridOptions"
         :contextmenu="contextmenu"
-        @onCellClicked="onCellClicked"
-        @onColumnMoved="onColumnMoved"
+        @onRowClicked="onRowClicked"
       ></grid>
 
       <!-- domLayout='autoHeight' -->
@@ -66,7 +63,6 @@ export default {
           headerName: 'Athlete',
           field: 'athlete',
           cellClass: 'aaaaa',
-          rowDrag: true,
           cellStyle() {
             return { color: 'blue' };
           }
@@ -151,9 +147,6 @@ export default {
     moveColumn() {
       this.$refs.table.moveColumns(['age', 'year'], 8);
     },
-    onColumnMoved(a, b, c) {
-      console.log(a, b, c);
-    },
     startEditingCell() {
       this.$refs.table.setFocusedCell(0, 'sport');
       this.$refs.table.startEditingCell(0, 'sport');
@@ -174,7 +167,7 @@ export default {
         }
       });
     },
-    onCellClicked() {
+    onRowClicked() {
       // console.log(111);
     },
     updateColumn() {
