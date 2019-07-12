@@ -13,7 +13,6 @@ export default {
     setRowData(datas) {
       this.setCacheData(datas);
       this.updatedDatas = [];
-      this.editedDatas = [];
       const TimeID = setTimeout(() => {
         this.gridApi.setRowData(datas);
         clearTimeout(TimeID);
@@ -80,9 +79,5 @@ export default {
     moveColumnByIndex(fromIndex, toIndex) {
       return this.gridColumnApi.moveColumnByIndex(fromIndex, toIndex);
     }
-    /**
-     * 修改列配置
-     * changeColumns(columns)
-     */
   }
 };

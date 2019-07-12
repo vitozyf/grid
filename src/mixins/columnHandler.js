@@ -11,9 +11,9 @@ export default {
   },
   methods: {
     changeColumns(columns) {
+      const VM = this;
       columns.forEach(column => {
         let cellClass = column.cellClass || '';
-
         // 选择编辑组件
         if (column.dataMap && column.dataMap.length > 0) {
           column.cellEditorFramework = 'VitoGridColumnSelect';
@@ -24,11 +24,17 @@ export default {
             return CellMapItem ? CellMapItem.value : '';
           };
           cellClass += ' vito-grid-select-cell';
+        } else {
+          cellClass = cellClass.replace(/vito-grid-select-cell/g, '');
+          column.cellEditorFramework = null;
+          column.valueFormatter = null;
         }
 
         // 只读类
         if (column.editable === false && this.type === 'edit') {
           cellClass += ' vito-grid-column-readonly';
+        } else {
+          cellClass = cellClass.replace(/vito-grid-column-readonly/g, '');
         }
         column.cellClass = cellClass;
 
@@ -41,13 +47,13 @@ export default {
 
         // 单元格样式
         const UserCellStyle = column.cellStyle;
-        column.cellStyle = params => {
+        const SystemCellStyle = params => {
           let style = {};
-          if (this.cacheData[params.node.rowIndex]) {
+          if (VM.cacheData[params.node.rowIndex]) {
             if (
               !valueIsEqual(
                 params.value,
-                this.cacheData[params.node.rowIndex][params.colDef.field]
+                VM.cacheData[params.node.rowIndex][params.colDef.field]
               )
             ) {
               style.backgroundColor = '#ffe174';
@@ -58,6 +64,8 @@ export default {
           }
           return style;
         };
+
+        column.cellStyle = VM.type === 'edit' ? SystemCellStyle : UserCellStyle;
       });
 
       // 选择列
@@ -80,6 +88,7 @@ export default {
           suppressMovable: true
         };
         if (this.selectConfig) {
+          // 本页、全部
           CheckedColumn.headerComponentFramework = 'VitoGridColumnCheckHeader';
           CheckedColumn.headerComponentParams = {
             selectConfig: this.selectConfig

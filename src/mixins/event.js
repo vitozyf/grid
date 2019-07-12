@@ -40,7 +40,6 @@ export default {
       this.$emit('onGridReady', e);
     },
     cellEditingStarted(e) {
-      this.addEditedDatas(e.data);
       this.$emit('onCellEditingStarted', e);
     },
     cellValueChanged(e) {

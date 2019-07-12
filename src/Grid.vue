@@ -11,7 +11,7 @@
       :columnDefs="columns"
       :rowData="datas"
       ref="table"
-      :gridOptions="options"
+      :gridOptions="gridOptions"
       :defaultColDef="defaultColDefComputed"
       :enterMovesDown="true"
       :enterMovesDownAfterEdit="true"
@@ -126,14 +126,6 @@ export default {
   },
 
   computed: {
-    options: {
-      get() {
-        return Object.assign(this.insideOptions, this.gridOptions);
-      },
-      set(o) {
-        this.insideOptions = o;
-      }
-    },
     defaultColDefComputed: {
       get() {
         return Object.assign({}, this.defaultColDef, this.defaultColPro);
@@ -152,12 +144,10 @@ export default {
 
   data() {
     return {
-      insideOptions: null,
       gridApi: null,
       columnApi: null,
       defaultColDef: {},
       updatedDatas: [],
-      editedDatas: [],
       cacheData: [],
       RightMenuConfig: {
         visible: false,
@@ -238,18 +228,6 @@ export default {
       }
     },
     /**
-     * 增加编辑的数据
-     */
-    addEditedDatas(editedData) {
-      if (
-        !this.editedDatas.find(
-          item => JSON.stringify(item) === JSON.stringify(editedData)
-        )
-      ) {
-        this.editedDatas.push(editedData);
-      }
-    },
-    /**
      * 设置数据缓存
      */
     setCacheData(datas) {
@@ -284,12 +262,9 @@ export default {
     this.initCreated();
     this.dealContextmenus();
   },
-  beforeMount() {
-    this.insideOptions = {};
-  },
   mounted() {
-    this.gridApi = this.insideOptions.api;
-    this.gridColumnApi = this.insideOptions.columnApi;
+    this.gridApi = this.gridOptions.api;
+    this.gridColumnApi = this.gridOptions.columnApi;
     this.initMounted();
   }
 };

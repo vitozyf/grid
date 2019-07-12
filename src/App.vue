@@ -6,9 +6,6 @@
     <div class="header">
       <button @click="addNew">新增一行</button>
       <button @click="getSelectedRows">已选数据</button>
-      <button @click="getModel">获取行模型</button>
-      <button @click="paginationGetPageSize">每页行数</button>
-      <button @click="setDataSource">设置数据</button>
       <button @click="getUpdatedDatas">获取修改数据</button>
       <button @click="updateColumn">更新列状态</button>
       <button @click="forEachNode">选择部分数据</button>
@@ -19,25 +16,38 @@
     <div class="header">
       <button @click="moveColumn">移动列</button>
     </div>
-    <div :style="{height: '800px', padding: '0 10px'}">
+    <div :style="{height: '400px', padding: '0 10px'}">
 
       <grid
         :columns="columns"
-        :datas="datas"
+        :datas="datas1"
         :selection="true"
-        ref="table"
+        ref="table1"
         type="edit"
         :getRowClass="getRowClass"
         :total-count="10000"
         :page-size="20"
         :page-index="1"
         :onPageChanged="onPageChanged"
-        :gridOptions="gridOptions"
         :contextmenu="contextmenu"
         @onRowClicked="onRowClicked"
       ></grid>
-
-      <!-- domLayout='autoHeight' -->
+    </div>
+    <div :style="{height: '400px', padding: '50px 10px'}">
+      <grid
+        :columns="columns1"
+        :datas="datas2"
+        :selection="true"
+        ref="table2"
+        type="edit"
+        :getRowClass="getRowClass"
+        :total-count="10000"
+        :page-size="20"
+        :page-index="1"
+        :onPageChanged="onPageChanged"
+        :contextmenu="contextmenu"
+        @onRowClicked="onRowClicked"
+      ></grid>
     </div>
   </div>
 </template>
@@ -57,7 +67,8 @@ export default {
   name: 'app',
   data() {
     return {
-      gridOptions: null,
+      gridOptionsFirst: null,
+      gridOptionsSecond: null,
       columns: [
         {
           headerName: 'Athlete',
@@ -98,19 +109,7 @@ export default {
         {
           headerName: 'Year',
           field: 'year',
-          editable: true,
-          valueFormatter(params) {
-            if (params.value > 201910) {
-              return '展示中1';
-            }
-            return '未展示2';
-          }
-          // cellRenderer(params) {
-          //   if (params.value > 201910) {
-          //     return '展示中';
-          //   }
-          //   return '未展示';
-          // }
+          editable: true
         },
         {
           headerName: 'Date',
@@ -138,30 +137,99 @@ export default {
           field: 'total'
         }
       ],
-      datas: [],
+      columns1: [
+        {
+          headerName: 'Athlete',
+          field: 'athlete',
+          cellClass: 'aaaaa',
+          cellStyle() {
+            return { color: 'blue' };
+          }
+        },
+        {
+          headerName: 'Age',
+          field: 'age',
+          headerClass: 'abc',
+          resizable: false,
+          width: 120,
+          suppressMovable: true,
+          dataMap: [
+            {
+              key: 0,
+              value: '天'
+            },
+            {
+              key: 1,
+              value: '地'
+            },
+            {
+              key: 2,
+              value: '人'
+            }
+          ],
+          editable: true
+        },
+        {
+          headerName: 'Country',
+          field: 'country',
+          editable: false
+        },
+        {
+          headerName: 'Year',
+          field: 'year',
+          editable: true
+        },
+        {
+          headerName: 'Date',
+          field: 'date'
+        },
+        {
+          headerName: 'Sport',
+          field: 'sport'
+        },
+        {
+          headerName: 'Gold',
+          field: 'gold',
+          cellClass: 'bg-orange'
+        },
+        {
+          headerName: 'Silver',
+          field: 'silver'
+        },
+        {
+          headerName: 'Bronze',
+          field: 'bronze'
+        },
+        {
+          headerName: 'Total',
+          field: 'total'
+        }
+      ],
+      datas1: [],
+      datas2: [],
       selectConfig: {},
       contextmenu: []
     };
   },
   methods: {
     moveColumn() {
-      this.$refs.table.moveColumns(['age', 'year'], 8);
+      this.$refs.table1.moveColumns(['age', 'year'], 8);
     },
     startEditingCell() {
-      this.$refs.table.setFocusedCell(0, 'sport');
-      this.$refs.table.startEditingCell(0, 'sport');
+      this.$refs.table1.setFocusedCell(0, 'sport');
+      this.$refs.table1.startEditingCell(0, 'sport');
     },
     updateRowData() {
-      this.datas[0].athlete = 999;
-      this.datas[1].athlete = 888;
-      // console.log(this.$refs.table.updateRowData);
-      this.$refs.table.updateRowData([this.datas[0], this.datas[1]]);
+      this.datas1[0].athlete = 999;
+      this.datas1[1].athlete = 888;
+      // console.log(this.$refs.table1.updateRowData);
+      this.$refs.table1.updateRowData([this.datas1[0], this.datas1[1]]);
     },
     selectAllType() {
       console.log(this.selectConfig);
     },
     forEachNode() {
-      this.$refs.table.forEachNode(node => {
+      this.$refs.table1.forEachNode(node => {
         if (node.data.year < 201910) {
           node.setSelected(true);
         }
@@ -173,39 +241,42 @@ export default {
     updateColumn() {
       const YearColumn = this.columns.find(item => item.field === 'year');
       YearColumn.editable = !YearColumn.editable;
-      // this.$set(YearColumn, 'editable', false);
-      // this.$refs.table.changeColumns(this.columns);
+
+      const AgeColumn = this.columns.find(item => item.field === 'age');
+      AgeColumn.dataMap = null;
+      this.$refs.table1.changeColumns(this.columns);
     },
     getUpdatedDatas() {
-      console.log(this.$refs.table.getUpdatedDatas());
-      console.log(this.$refs.table.cacheData);
+      console.log(this.$refs.table1.getUpdatedDatas());
     },
-    setDataSource() {
+    addNew() {
+      const Datas = this.datas1.map(item => {
+        return { ...item };
+      });
+      Datas.unshift({});
+
+      this.$refs.table1.setRowData(Datas);
+    },
+    onPageChanged(i) {
       const Datas = [];
       for (let index = 0; index < 100; index++) {
         Datas.push({
-          athlete: `zhang${index}`,
+          athlete: `vito${index}---${i}`,
           age: index,
-          country: 'USA',
-          year: `2019${index}`,
+          country: '中国',
+          year: `2019${index}---${i}`,
           date: '2019-06-30',
           sport: 'sport',
           gold: 'gold',
-          silver: 'silver',
-          bronze: 'bronze',
+          silver: i,
+          bronze: '0',
           total: 'total'
         });
       }
-      this.$refs.table.setRowData(Datas);
-    },
-    addNew() {
-      this.datas.unshift({});
-    },
-    paginationGetPageSize() {
-      console.log(this.$refs.table.gridApi.paginationGetPageSize());
-    },
-    onPageChanged(index) {
-      console.log(index);
+      // this.datas1 = Datas;
+      setTimeout(() => {
+        this.$refs.table1.setRowData(Datas);
+      }, 1000);
     },
     onPaginationChanged(e) {
       console.log(111, e);
@@ -217,32 +288,13 @@ export default {
       return '';
     },
     getSelectedRows() {
-      // const gridOptions = this.$refs.table.gridOptions;
-      console.log(this.$refs.table.getSelectedRows());
-      // this.$refs.table.gridApi.deselectAll();
-
-      // this.$refs.table.gridColumnApi.autoSizeColumns();
-      // this.$refs.table.gridApi.updateRowData([{ age: 0 }]);
-    },
-    getModel() {
-      console.log(this.$refs.table.gridApi.getModel());
+      console.log(this.$refs.table1.getSelectedRows());
     },
     getDatas() {
-      // const vm = this;
-      // const httpRequest = new XMLHttpRequest();
-      // httpRequest.open(
-      //   'GET',
-      //   'https://raw.githubusercontent.com/ag-grid/ag-grid/master/packages/ag-grid-docs/src/olympicWinnersSmall.json'
-      // );
-      // httpRequest.send();
-      // httpRequest.onreadystatechange = () => {
-      //   if (httpRequest.readyState === 4 && httpRequest.status === 200) {
-      //     vm.datas = JSON.parse(httpRequest.responseText);
-      //   }
-      // };
-      const Datas = [];
-      for (let index = 0; index < 100; index++) {
-        Datas.push({
+      const Datas1 = [];
+      const Datas2 = [];
+      for (let index = 0; index < 200; index++) {
+        Datas1.push({
           athlete: `vito${index}`,
           age: index,
           country: '中国',
@@ -254,44 +306,32 @@ export default {
           bronze: '0',
           total: 'total'
         });
+        Datas2.push({
+          athlete: `aaaa${index}`,
+          age: index,
+          country: '美国',
+          year: `${index}`,
+          date: '2019-06-20',
+          gold: '111',
+          silver: 'slice',
+          bronze: '0',
+          total: 'total22'
+        });
       }
-      this.datas = Datas;
-      // this.$refs.table.setRowData(Datas);
+      this.datas1 = Datas1;
+      this.datas2 = Datas2;
+      this.$refs.table1.setRowData(Datas1);
+      this.$refs.table2.setRowData(Datas2);
     }
   },
   created() {
+    this.gridOptionsFirst = {};
+    // this.gridOptionsSecond = {};
+    this.gridOptionsSecond = { alignedGrids: [this.gridOptionsFirst] };
+  },
+  mounted() {
     this.getDatas();
-    this.gridOptions = {};
-    // this.contextmenu = [
-    //   {
-    //     text: '测试',
-    //     click(e) {
-    //       console.log(333, e);
-    //     }
-    //   }
-    // ];
-    // setTimeout(() => {
-    //   this.contextmenu = [
-    //     {
-    //       text: '测试1',
-    //       click(e) {
-    //         console.log(444, e);
-    //       }
-    //     }
-    //   ];
-    // }, 2000);
   }
-  // mounted() {
-  //   document.oncontextmenu = function(e) {
-  //     console.log(123);
-  //     var e = e || window.event;
-  //     //阻止冒泡
-  //     e.cancelBubble = true;
-  //     //阻止触发默认事件
-  //     e.returnValue = false;
-  //     return false;
-  //   };
-  // }
 };
 </script>
 
