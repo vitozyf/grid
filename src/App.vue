@@ -117,7 +117,14 @@ export default {
         },
         {
           headerName: 'Sport',
-          field: 'sport'
+          field: 'sport',
+          valueFormatter(params) {
+            if (params.value) {
+              return '展示中';
+            } else {
+              return '未展示';
+            }
+          }
         },
         {
           headerName: 'Gold',
@@ -300,8 +307,7 @@ export default {
           country: '中国',
           year: `2019${index}`,
           date: '2019-06-30',
-
-          gold: '',
+          sport: !!(index % 2 === 0),
           silver: 0,
           bronze: '0',
           total: 'total'
@@ -312,7 +318,7 @@ export default {
           country: '美国',
           year: `${index}`,
           date: '2019-06-20',
-          gold: '111',
+          gold: null,
           silver: 'slice',
           bronze: '0',
           total: 'total22'

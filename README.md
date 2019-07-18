@@ -117,6 +117,10 @@ https://cdn.jsdelivr.net/npm/vito-grid@1.0.8/dist/grid.css
 
 ### 更新记录
 
+#### 1.0.9
+
+- 修复数据过滤器`valueFormatter`无效的问题
+
 #### 1.0.8
 
 - 新增：列拖动功能，默认所有列可以拖动，默认拖动到表格外部时删除列。可设置列属性`suppressMovable=true`禁止拖动，设置表格属性`suppressDragLeaveHidesColumns=true`阻止拖动到外部时删除列

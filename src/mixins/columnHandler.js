@@ -26,8 +26,6 @@ export default {
           cellClass += ' vito-grid-select-cell';
         } else {
           cellClass = cellClass.replace(/vito-grid-select-cell/g, '');
-          column.cellEditorFramework = null;
-          column.valueFormatter = null;
         }
 
         // 只读类
