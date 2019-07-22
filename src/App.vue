@@ -30,6 +30,7 @@
         :page-index="1"
         :onPageChanged="onPageChanged"
         :contextmenu="contextmenu"
+        :context="{a: 1}"
         @onRowClicked="onRowClicked"
       ></grid>
     </div>
@@ -69,81 +70,7 @@ export default {
     return {
       gridOptionsFirst: null,
       gridOptionsSecond: null,
-      columns: [
-        {
-          headerName: 'Athlete',
-          field: 'athlete',
-          cellClass: 'aaaaa',
-          cellStyle() {
-            return { color: 'blue' };
-          }
-        },
-        {
-          headerName: 'Age',
-          field: 'age',
-          headerClass: 'abc',
-          resizable: false,
-          width: 120,
-          suppressMovable: true,
-          dataMap: [
-            {
-              key: 0,
-              value: '天'
-            },
-            {
-              key: 1,
-              value: '地'
-            },
-            {
-              key: 2,
-              value: '人'
-            }
-          ],
-          editable: true
-        },
-        {
-          headerName: 'Country',
-          field: 'country',
-          editable: false
-        },
-        {
-          headerName: 'Year',
-          field: 'year',
-          editable: true
-        },
-        {
-          headerName: 'Date',
-          field: 'date'
-        },
-        {
-          headerName: 'Sport',
-          field: 'sport',
-          valueFormatter(params) {
-            if (params.value) {
-              return '展示中';
-            } else {
-              return '未展示';
-            }
-          }
-        },
-        {
-          headerName: 'Gold',
-          field: 'gold',
-          cellClass: 'bg-orange'
-        },
-        {
-          headerName: 'Silver',
-          field: 'silver'
-        },
-        {
-          headerName: 'Bronze',
-          field: 'bronze'
-        },
-        {
-          headerName: 'Total',
-          field: 'total'
-        }
-      ],
+      columns: [],
       columns1: [
         {
           headerName: 'Athlete',
@@ -283,7 +210,7 @@ export default {
       // this.datas1 = Datas;
       setTimeout(() => {
         this.$refs.table1.setRowData(Datas);
-      }, 1000);
+      }, 500);
     },
     onPaginationChanged(e) {
       console.log(111, e);
@@ -336,6 +263,81 @@ export default {
     this.gridOptionsSecond = { alignedGrids: [this.gridOptionsFirst] };
   },
   mounted() {
+    this.$refs.table1.changeColumns([
+      {
+        headerName: 'Athlete',
+        field: 'athlete',
+        cellClass: 'aaaaa',
+        cellStyle() {
+          return { color: 'blue' };
+        }
+      },
+      {
+        headerName: 'Age',
+        field: 'age',
+        headerClass: 'abc',
+        resizable: false,
+        width: 120,
+        suppressMovable: true,
+        dataMap: [
+          {
+            key: 0,
+            value: '天'
+          },
+          {
+            key: 1,
+            value: '地'
+          },
+          {
+            key: 2,
+            value: '人'
+          }
+        ],
+        editable: true
+      },
+      {
+        headerName: 'Country',
+        field: 'country',
+        editable: false
+      },
+      {
+        headerName: 'Year',
+        field: 'year',
+        editable: true
+      },
+      {
+        headerName: 'Date',
+        field: 'date'
+      },
+      {
+        headerName: 'Sport',
+        field: 'sport',
+        valueFormatter(params) {
+          if (params.value) {
+            return '展示中';
+          } else {
+            return '未展示';
+          }
+        }
+      },
+      {
+        headerName: 'Gold',
+        field: 'gold',
+        cellClass: 'bg-orange'
+      },
+      {
+        headerName: 'Silver',
+        field: 'silver'
+      },
+      {
+        headerName: 'Bronze',
+        field: 'bronze'
+      },
+      {
+        headerName: 'Total',
+        field: 'total'
+      }
+    ]);
     this.getDatas();
   }
 };

@@ -1,4 +1,4 @@
-## Vue 表格组件 - 1.0.8
+## Vue 表格组件 - 1.0.10
 
 ### 表格属性
 
@@ -24,7 +24,7 @@
 | getRowClass                   | 行类名回调                                            |                                 | Function                              |
 | isRowSelectable               | 回调用于确定哪些行是可选择的                          |                                 | Function                              |
 | domLayout                     | 设置为`autoHeight`根据数据调整高度否则必须给容器高度  | normal                          | String(`normal`,`autoHeight`,`print`) |
-| context                       | 上下文对象,传递给大多数回调(内部不使用)               |                                 | Any                                   |
+| context                       | 上下文对象,传递给回调方法                             |                                 | Any                                   |
 | selection                     | 是否开启数据选择                                      | false                           | Boolean                               |
 | defaultColPro                 | 列的重复定义属性(如设置最小列宽不用每列单独设置)      | {}                              | Object                                |
 | overlayNoRowsTemplate         | 空数据 html 模版                                      | `'<span>暂无数据</span>'`       | String                                |
@@ -103,6 +103,20 @@
 | onCellContextMenu                              | 右键单元格时         |
 | onColumnMoved                                  | 列拖动事件           |
 
+### 固定类
+
+- `ag-row-hover`
+
+```javascript
+    CSS类`ag-row-hover`添加了行hover背景颜色，注意需要加`!important`
+```
+
+- `ag-column-hover`
+
+```javascript
+    CSS类`ag-column-hover`添加了列hover背景颜色
+```
+
 ### 在线 CDN
 
 ```javascript
@@ -116,6 +130,10 @@ https://cdn.jsdelivr.net/npm/vito-grid@1.0.8/dist/grid.css
 ```
 
 ### 更新记录
+
+#### 1.0.10(dev)
+
+- 编辑状态异常使用上下文对象传递  缓存数据
 
 #### 1.0.9
 

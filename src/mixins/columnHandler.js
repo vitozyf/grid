@@ -29,16 +29,18 @@ export default {
         }
 
         // 只读类
-        if (column.editable === false && this.type === 'edit') {
-          cellClass += ' vito-grid-column-readonly';
-        } else {
-          cellClass = cellClass.replace(/vito-grid-column-readonly/g, '');
+        if (VM.type === 'edit') {
+          if (column.editable === false) {
+            cellClass += ' vito-grid-column-readonly';
+          } else {
+            cellClass = cellClass.replace(/vito-grid-column-readonly/g, '');
+          }
         }
         column.cellClass = cellClass;
 
         // 不可编辑列
         column.editable =
-          column.editable === false ? false : this.type === 'edit';
+          column.editable === false ? false : VM.type === 'edit';
 
         // 自动调整列宽时不包含设置宽度的列
         column.suppressSizeToFit = !!column.width;
@@ -47,11 +49,12 @@ export default {
         const UserCellStyle = column.cellStyle;
         const SystemCellStyle = params => {
           let style = {};
-          if (VM.cacheData[params.node.rowIndex]) {
+          const CacheData = params.context.getCacheData();
+          if (CacheData[params.node.rowIndex]) {
             if (
               !valueIsEqual(
                 params.value,
-                VM.cacheData[params.node.rowIndex][params.colDef.field]
+                CacheData[params.node.rowIndex][params.colDef.field]
               )
             ) {
               style.backgroundColor = '#ffe174';
@@ -67,11 +70,10 @@ export default {
       });
 
       // 选择列
-      if (
-        this.selection &&
-        !columns.find(item => item.checkboxSelection) &&
-        columns.length > 0
-      ) {
+      const checkboxSelectionColumn = columns.find(
+        item => item.checkboxSelection
+      );
+      if (this.selection && !checkboxSelectionColumn && columns.length > 0) {
         const CheckedColumn = {
           checkboxSelection: true,
           headerCheckboxSelection: true,

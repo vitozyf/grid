@@ -21,6 +21,7 @@
       :singleClickEdit="true"
       :overlayNoRowsTemplate="overlayNoRowsTemplate"
       :stopEditingWhenGridLosesFocus="true"
+      :context="contextCpmpoted"
     ></ag-grid-vue>
     <el-pagination
       v-if="!!onPageChanged"
@@ -122,6 +123,12 @@ export default {
       default() {
         return [];
       }
+    },
+    context: {
+      type: Object,
+      default() {
+        return {};
+      }
     }
   },
 
@@ -133,6 +140,17 @@ export default {
       set(col) {
         this.defaultColDef = col;
       }
+    },
+    contextCpmpoted() {
+      const vm = this;
+      if (vm.context) {
+        return Object.assign({}, this.context, {
+          getCacheData: vm.getCacheData
+        });
+      }
+      return {
+        getCacheData: vm.getCacheData
+      };
     }
   },
 
@@ -213,7 +231,7 @@ export default {
      */
     initMounted() {
       this.changeColumns(this.columns);
-      this.setCacheData(this.datas);
+      // this.setCacheData(this.datas);
     },
     /**
      * 增加已修改的数据集合
@@ -236,6 +254,12 @@ export default {
           return { ...row };
         })
       );
+    },
+    /**
+     * 获取数据缓存
+     */
+    getCacheData() {
+      return this.cacheData;
     },
     /**
      * 阻止浏览器默认右击事件
