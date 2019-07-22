@@ -133,7 +133,7 @@ https://cdn.jsdelivr.net/npm/vito-grid@1.0.8/dist/grid.css
 
 #### 1.0.10(dev)
 
-- 编辑状态异常使用上下文对象传递  缓存数据
+- 编辑状态异常使用上下文对象传递缓存数据
 
 #### 1.0.9
 
