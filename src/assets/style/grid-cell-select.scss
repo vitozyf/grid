@@ -19,4 +19,12 @@
       font-weight: 700;
     }
   }
+  .ag-cell {
+    .el-icon-arrow-down {
+      position: absolute;
+      top: 50%;
+      right: 5px;
+      transform: translateY(-50%);
+    }
+  }
 }

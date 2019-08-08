@@ -17,26 +17,41 @@ export default {
         // 选择编辑组件
         if (column.dataMap && column.dataMap.length > 0) {
           column.cellEditorFramework = 'VitoGridColumnSelect';
-          column.valueFormatter = params => {
+          column.cellRenderer = params => {
             const CellMapItem = column.dataMap.find(
               item => item.key === params.value
             );
-            return CellMapItem ? CellMapItem.value : '';
+            return `<span>${
+              CellMapItem ? CellMapItem.value : ''
+            }</span><i class="el-icon-arrow-down"></i>`;
           };
-          cellClass += ' vito-grid-select-cell';
-        } else {
-          cellClass = cellClass.replace(/vito-grid-select-cell/g, '');
         }
 
         // 只读类
         if (VM.type === 'edit') {
           if (column.editable === false) {
-            cellClass += ' vito-grid-column-readonly';
+            if (typeof cellClass === 'function') {
+              column.cellClass = params => {
+                return cellClass(params) + ' vito-grid-column-readonly';
+              };
+            } else {
+              cellClass += ' vito-grid-column-readonly';
+              column.cellClass = cellClass;
+            }
           } else {
-            cellClass = cellClass.replace(/vito-grid-column-readonly/g, '');
+            if (typeof cellClass === 'function') {
+              column.cellClass = params => {
+                return cellClass(params).replace(
+                  /vito-grid-column-readonly/g,
+                  ''
+                );
+              };
+            } else {
+              cellClass = cellClass.replace(/vito-grid-column-readonly/g, '');
+              column.cellClass = cellClass;
+            }
           }
         }
-        column.cellClass = cellClass;
 
         // 不可编辑列
         column.editable =

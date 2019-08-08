@@ -1,4 +1,4 @@
-## Vue 表格组件 - 1.0.10
+## Vue 表格组件 - 1.0.11
 
 ### 表格属性
 
@@ -51,8 +51,8 @@
 | resizable                | 允许调整列的大小                         | false          | Boolean                   |
 | checkboxSelection        | 在列中呈现选择复选框                     | false          | Boolean Function(Boolean) |
 | headerCheckboxSelection  | 在表头中呈现选择复选框                   | false          | Boolean Function(Boolean) |
-| cellClass                | 单元格的类                               |                | String, Function(String)  |
-| cellStyle                | 单元格样式                               |                | Object, Function(Object)  |
+| cellClass                | 单元格的类                               |                | String, Function(params)  |
+| cellStyle                | 单元格样式                               |                | Object, Function(params)  |
 | editable                 | 是否允许编辑                             | false          | Boolean                   |
 | dataMap                  | 单元格编辑格式为选择项                   | [{key, value}] | Array                     |
 | valueFormatter           | 数据过滤器(简单数据展示尽量使用此过滤器) |                | Function                  |
@@ -130,6 +130,11 @@ https://cdn.jsdelivr.net/npm/vito-grid@1.0.8/dist/grid.css
 ```
 
 ### 更新记录
+
+#### 1.0.11
+
+- 修复列属性`cellClass`传入函数无效的问题，现在可以传函数及字符串
+- `dataMap`列增加下拉箭头表示
 
 #### 1.0.10(dev)
 

@@ -111,7 +111,13 @@ export default {
         {
           headerName: 'Year',
           field: 'year',
-          editable: true
+          editable: true,
+          cellClass(params) {
+            if (params.value - 1 === 0) {
+              return 'bg-orange';
+            }
+            return '';
+          }
         },
         {
           headerName: 'Date',
@@ -124,7 +130,9 @@ export default {
         {
           headerName: 'Gold',
           field: 'gold',
-          cellClass: 'bg-orange'
+          cellClass() {
+            return 'bg-orange';
+          }
         },
         {
           headerName: 'Silver',
