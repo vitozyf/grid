@@ -12,6 +12,7 @@
       <button @click="selectAllType">全选项</button>
       <button @click="updateRowData">更新行数据</button>
       <button @click="startEditingCell">编辑API</button>
+      <button @click="editFirstData">修改首行数据</button>
     </div>
     <div class="header">
       <button @click="moveColumn">移动列</button>
@@ -41,7 +42,6 @@
         :selection="true"
         ref="table2"
         type="edit"
-        :getRowClass="getRowClass"
         :total-count="10000"
         :page-size="20"
         :page-index="1"
@@ -232,6 +232,13 @@ export default {
     getSelectedRows() {
       console.log(this.$refs.table1.getSelectedRows());
     },
+    editFirstData() {
+      console.log(123);
+      this.datas1[0].athlete = 'aaa';
+      this.$refs.table1.updateRowData(this.datas1[0]);
+      console.log(this.$refs.table1.gridApi.redrawRows());
+      // redrawRows
+    },
     getDatas() {
       const Datas1 = [];
       const Datas2 = [];
@@ -343,7 +350,10 @@ export default {
       },
       {
         headerName: 'Total',
-        field: 'total'
+        field: 'total',
+        cellRenderer(){
+          return `<i>eee</i>`
+        }
       }
     ]);
     this.getDatas();

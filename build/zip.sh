@@ -5,6 +5,8 @@ cp -r dist/fonts/ dist/assets/vue/Grid/fonts
 
 cp -r dist/grid.css dist/grid.umd.min.js dist/grid.umd.min.js.map  dist/assets/vue/Grid
 
+cp -r dist/grid.css dist/grid.umd.min.js dist/grid.umd.min.js.map  /Users/zhangyongfeng/Code/ZnlBomAISNS/src/lib/Grid
+
 cd ./dist/
 
 zip -q -r -o  Grid.zip assets/
